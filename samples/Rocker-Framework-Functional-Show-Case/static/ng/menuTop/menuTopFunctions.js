@@ -2,7 +2,7 @@ function closeAllPages(){
 	singletonRockerCommons.setClass('home','');
 	singletonRockerCommons.setClass('concepts','');
 	singletonRockerCommons.setClass('components','');
-	singletonRockerCommons.setClass('sourcecode','');
+	//singletonRockerCommons.setClass('sourcecode','');
 	singletonRockerCommons.setClass('about','');
 	singletonRockerCommons.setClass('downloads','');
 	singletonRockerCommons.hide('root');
