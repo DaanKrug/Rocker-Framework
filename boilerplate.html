@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  	<meta charset="utf-8">
+	  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  	<meta name="viewport" content="width=device-width, initial-scale=1">
+	  	<title>Rocker Framework Boilerplate</title>
+	  	<!-- Amazon AWS sdk - dependency for UpperFileS3 component -->
+	  	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.0-rc.20.min.js"></script>
+	    <!-- The Rocker Framerk File Loader -->
+	    <script src="./rocker/rocker.js"></script>
+	    <!-- load the Rocker js files, according the path on you put main folder  -->
+	    <script>
+	    	initRocker('.');// call to  Rocker Framerk File Loader makes the initialization
+	    </script>
+	    <!-- your script developed whit Rocker Framework -->
+	  	<script src="./js/my_rocker_file_script.js"></script>
+	</head>
+	<body>
+	  <div id="root"></div>
+	  <!--  Call to object/function in your script 
+	  		that will draw the RockerForm/RockerTable element 
+	  		appending it into a HTML element whit id=root
+	   -->
+	  <script>
+	  		new MyRockerForm('root');
+	  		// internally handle the details construction of a RockerForm(s), RockerTable(s) and others
+	  </script>
+	</body>
+</html>

@@ -1,0 +1,1517 @@
+<div style="height: 500px; overflow-x:hidden; overflow-y: auto; margin: -10px 0px 20px 0px;">
+	<div class="ui-corner-all" style="margin: 0px 10px 20px 10px;">
+		<div class="ui-widget-header ui-corner-top" 
+		     style="text-align: center; padding: 10px;" >
+			rockstars.js File
+		</div>
+		<div class="ui-corner-bottom" 
+			 style="border-radius: 0px !important; background-color: #fff !important;">
+	<pre>
+
+/**
+     This function show how useful could be the use of RockerAjaxHandler object to make ajax requests in
+     a simple way
+*/
+var ExampleOfUseOfAjaxHandler = function(actionForm)&#123;
+	
+	  this.actionForm = actionForm;
+	  
+	  console.log('');
+	  console.log('exampleOfUseOfAjaxHandler: This function show how useful could be the use of RockerAjaxHandler object to make ajax requests in a simple way');
+	  /**
+	      Creates the ajax handler object
+	   */
+	  var url = this.actionForm + '?operation=exampleOfUseOfAjaxHandler&expected=OK';
+	  var rajax = new RockerAjaxHandler(url,null);
+	  /**
+	        We should override the "handleSuceed" and the "handleUnsuceed"
+	        methods. These methods are the callback handlers for sucessfull 
+	        and unsucessfull results.
+	        
+	        if result becomes (equal to expectedResult) 
+	        	or (expectedResult is null and the ajax request is complete [HttpStatus 200 or 0]) , executes the handleSuceed
+	        else execute handleUnsuceed.
+	        
+	        These callback functions could be used for all that is imaginated, hide and show elements, append the result
+	        into a DOM element, create new DOM elements, call events in elements whit predetermined ids, or split ids from result,
+	        store the result into a variable to use in another moment and much more.
+	   */
+	  rajax.handleSuceed = function(result)&#123;
+		  console.log('rajax.handleSuceed =&gt; ' + result);
+	  &#125;;
+	  rajax.handleUnsuceed = function(result)&#123;
+		  console.log('rajax.handleUnsuceed =&gt; ' + result);
+	  &#125;;
+	  /**
+	      now after override callback methods we should send the request
+	   */
+	  rajax.send();
+	  
+	  
+	  var url2 = this.actionForm + '?operation=exampleOfUseOfAjaxHandler&expected=OKK';
+	  var expectedResult2 = 'OK';
+	  var rajax2 = new RockerAjaxHandler(url2,null);
+	  rajax2.handleSuceed = function(result)&#123;
+		  console.log('rajax2.handleSuceed =&gt; ' + result);
+	  &#125;;
+	  rajax2.handleUnsuceed = function(result)&#123;
+		  console.log('rajax2.handleUnsuceed =&gt; ' + result);
+	  &#125;;
+	  rajax2.send();
+	  rajax2 = new RockerAjaxHandler(url2,expectedResult2);
+	  rajax2.handleSuceed = function(result)&#123;
+		  console.log('rajax2.handleSuceed =&gt; ' + result);
+	  &#125;;
+	  rajax2.handleUnsuceed = function(result)&#123;
+		  console.log('rajax2.handleUnsuceed =&gt; ' + result);
+	  &#125;;
+	  rajax2.send();
+	  
+	  var url3 = this.actionForm + '?operation=exampleOfUseOfAjaxHandler&expected=OK';
+	  var expectedResult3 = 'OK';
+	  var rajax3 = new RockerAjaxHandler(url3,expectedResult3);
+	  rajax3.handleSuceed = function(result)&#123;
+		  console.log('rajax3.handleSuceed =&gt; ' + result);
+	  &#125;;
+	  rajax3.handleUnsuceed = function(result)&#123;
+		  console.log('rajax3.handleUnsuceed =&gt; ' + result);
+	  &#125;;
+	  rajax3.send();
+	  
+	  
+	  var url4 = this.actionForm + '?operation=exampleOfUseOfAjaxHandler&expected=';
+	  var expectedResult4 = 'OK';
+	  var rajax4 = new RockerAjaxHandler(url4,expectedResult4);
+	  rajax4.handleSuceed = function(result)&#123;
+		  console.log('rajax4.handleSuceed =&gt; ' + result);
+	  &#125;;
+	  rajax4.handleUnsuceed = function(result)&#123;
+		  console.log('rajax4.handleUnsuceed =&gt; ' + result);
+	  &#125;;
+	  rajax4.send();
+	  
+	  var url5 = this.actionForm + '?operation=exampleOfUseOfAjaxHandler&expected=ERROR';
+	  var expectedResult5 = null;
+	  var rajax5 = new RockerAjaxHandler(url5,expectedResult5);
+	  rajax5.handleSuceed = function(result)&#123;
+		  console.log('rajax5.handleSuceed =&gt; ' + result);
+	  &#125;;
+	  rajax5.handleUnsuceed = function(result)&#123;
+		  console.log('rajax5.handleUnsuceed =&gt; ' + result);
+	  &#125;;
+	  rajax5.send();
+	  
+	  var url6 = this.actionForm + '?operation=exampleOfUseOfAjaxHandler&expected=';
+	  var expectedResult6 = null;
+	  var rajax6 = new RockerAjaxHandler(url6,expectedResult6);
+	  rajax6.handleSuceed = function(result)&#123;
+		  console.log('rajax6.handleSuceed =&gt; ' + result);
+	  &#125;;
+	  rajax6.handleUnsuceed = function(result)&#123;
+		  console.log('rajax6.handleUnsuceed =&gt; ' + result);
+	  &#125;;
+	  rajax6.send();
+&#125;;
+
+var ShaffroindExampler = function()&#123;
+	
+	this.shaf1 = new RockerShafroind();
+	this.shaf2 = new RockerShafroindd();
+	
+	this.showExampleUse = function()&#123;
+		
+		console.log('If you need use non encripted strings in HardCode mode, you can use a simple obfuscation mechanism, provided by Rocker.');
+		console.log('Pay atention in following lines to "take" the tricks.');
+		var data = 'Hello word is not a good password.';
+		var shaf1Data = this.shaf1.c(data);//obtain a int array from a string
+		var shaf2Data = this.shaf2.c(data);
+		console.log('shaf1.c(\'' + data + '\') =&gt; ' + shaf1Data);
+		console.log('shaf2.c(\'' + data + '\') =&gt; ' + shaf2Data);
+		
+		/**
+		188,144,110,16,164, // H,e,l,l,o
+		13,// ,
+		168,164,258,142,// w,o,r,d,
+		253,// ,
+		240,291,// i,s,
+		13,// ,
+		181,164,294,// n,o,t, 
+		13,// ,
+		293,// a,
+		13,// ,
+		248,164,164,142,// g,o,o,d,
+		253,// ,
+		8,293,35,291,168,164,74,285,// p,a,s,s,w,o,r,d,
+		1// .,
+		*/
+		var data1 = this.shaf1.a(shaf1Data);//obtain the original string value from a int array
+		var data2 = this.shaf2.a(shaf2Data);
+		console.log('shaf1.a(' + shaf1Data + ') =&gt; ' + data1);
+		console.log('shaf2.a(' + shaf2Data + ') =&gt; ' + data2);
+	&#125;;
+	
+	this.showExampleUse();	
+&#125;;
+
+
+/**
+	Pay atention on this, will be important to understand some functionality
+*/
+var singletonInstance = null;
+var RockstarForm = function(idAppenderForm)&#123;
+  this.title = "Manage Rockstars";
+  this.idAppenderForm = idAppenderForm;
+  this.horizontalAlignFields = false;
+  this.width = 900;// -1 for auto, &gt; 0 to fixed size
+  this.closable = true;
+  this.modal = true;
+  this.actionForm = "http://localhost:4000/rockstars";
+  this.onclickSubmit = 'singletonInstance.showList();';
+  this.onRead = 'singletonInstance.showForm();';
+  this.onclickCancel = '';
+  this.textSubmit = 'Submit';
+  this.textCancel = 'Cancel';
+  this.errorCode = 'ERROR_606';
+  this.jsonCode = 'JSON_767';
+  this.posTop = 20;
+  this.posLeft = 30;
+  this.titleTable = "Greatest Rockstars of World ( or some of them )";	
+  this.typeObject = 'Rockstar'; // object class/name on the model
+  this.aliasObject = 'Rockstar'; // the name that is presented on UI relative to 'typeObject' 
+  this.additionalParamsAndValuesOnRequestTable = '';
+  this.onclose = '';
+  this.drawTableOnTop = false;// if the data table of the form should be draw before the form input elements (input, select, textarea) or after them.
+  this.minimizable = false;
+  this.initialLineNumbersTable = 5;
+  this.heightToggle = 100;
+  this.visibleButtonsTable = 3;
+  this.deleteAndEditButtonsOnTable = true;
+ 
+  this.tableOnNewTab = true;// true to put a form into one tab, and table in another - Bootstrap nav-bar 
+  
+  this.idToClickOnComplete = (this.tableOnNewTab ? ('showerTable_f_' + this.idAppenderForm) : null);// if using tabs, then click on 'List' tab when submit form is complete
+  
+  /**
+		Pay atention on this, will be important to understand some functionality
+  */
+  this.singletonInstanceForm = null;
+  this.owner = 'LoggedUserId';
+  
+  /**
+   *  See the buttons on Form, the singletonInstance, singletonInstanceForm, the default 'Rockstars' on node.js.appserver.js
+   *  
+   *  - with the 'additionalParamsAndValuesOnRequestTable' parameter its possible change the range of the data on a same table 
+   *    object component whit little work.
+   */
+  this.showOnlyRockstarsFromCurrentUser = function()&#123;
+	  this.additionalParamsAndValuesOnRequestTable = '';
+	  this.additionalParamsAndValuesOnRequestTable += '&operation=filterAndLoad';
+	  this.additionalParamsAndValuesOnRequestTable += '&additionalAtrr0=owner';
+	  this.additionalParamsAndValuesOnRequestTable += '&valueAdditionalAtrr0=LoggedUserId';
+	  this.additionalParamsAndValuesOnRequestTable += '&additionalAtrrEqual0=true';
+	  // re-draw all form
+	  //this.draw();
+	  // re-draw only the table
+	  this.singletonInstanceForm.additionalParamsAndValuesOnRequestTable = this.additionalParamsAndValuesOnRequestTable;
+	  this.singletonInstanceForm.makeTable();
+	  
+	  this.showList();
+  &#125;;
+  
+  /**
+   *  See the buttons on Form, the singletonInstance, singletonInstanceForm, the default 'Rockstars' on node.js.appserver.js
+   *  
+   *  - with the 'additionalParamsAndValuesOnRequestTable' parameter its possible change the range of the data on a same table 
+   *    object component whit little work.
+   */
+  this.showAllRockstarsFromAllUsers = function()&#123;
+	  this.additionalParamsAndValuesOnRequestTable = '';
+	  // re-draw all form
+	  //this.draw();
+	  // re-draw only the table
+	  this.singletonInstanceForm.additionalParamsAndValuesOnRequestTable = this.additionalParamsAndValuesOnRequestTable;
+	  this.singletonInstanceForm.makeTable();
+	  
+	  this.showList();
+  &#125;;
+  
+  this.showList = function()&#123;
+	  if(this.tableOnNewTab)&#123;
+		  singletonRockerCommons.clickElementById('showerTable_f_' + this.idAppenderForm );
+	  &#125;
+  &#125;;
+  
+  this.showForm = function()&#123;
+	  if(this.tableOnNewTab)&#123;
+		  singletonRockerCommons.clickElementById('showerForm_f_' + this.idAppenderForm );
+	  &#125;
+  &#125;;
+  
+  /**
+   	 Method invoked by additional button in table
+   */
+  this.showBiography = function(loggedUser,rockstarId)&#123;
+	  alert('Show biography of rockstarId =&gt; ' + rockstarId + ' loggedUser =&gt; ' + loggedUser);
+  &#125;;
+  
+  /**
+	 Method invoked by additional button in table
+   */
+  this.showPhoto = function(rockstarId)&#123;
+	  alert('Show photo of rockstarId =&gt; ' + rockstarId);
+  &#125;;
+  
+  this.getArrayFields = function()&#123;
+	  
+	var arrayFields = [];
+	var i = 0;
+
+	/**
+		Hidden = function (name,value) 
+	 */
+    arrayFields[i] = new Hidden('operation','store');
+    i++;
+    
+    arrayFields[i] = new Hidden('id','');
+    i++;
+    
+    /**
+     * Here we simulate owner as the loged in user in system, or the user that was created each 'Rockstar' registry.
+     */
+    arrayFields[i] = new Hidden('owner',this.owner);
+    i++;
+    
+    /**
+     	Styler = function (classNames,styles)
+     	
+     	Creates a internal (internal to a RockerForm) CSS appender element, 
+     		to add a new Style on execution time, when the RockerForm is created.
+     	These dinamic styles will be applied to all elements ( that match CSS rules ) bottom them.
+     	
+     	The element Styler following bottom will create the &lt;style&gt; :
+     	&lt;style&gt;
+     		.stylerToAppender1,.stylerToAppender2,#appender3&#123;
+     			border-radius: 12px !important;
+     			padding: 10px !important;
+     			border: 1px solid #666;
+     			cursor: pointer !important;
+     			font-size: 11px !important;
+     			font-family: verdana !important;
+     		&#125;
+     		.stylerToAppender1&#123;
+     			color: #515377 !important; background-color: #eaffaa !important;
+     		&#125;
+     		.stylerToAppender2&#123;
+     			color: #171605 !important; background-color: #aafffb !important;
+     		&#125;
+     		#appender3&#123;
+     			color: #ff0047 !important; background-color: #aaebff !important;
+     		&#125;
+     		.stylerToAppender1:hover,
+     		.stylerToAppender2:hover,
+     		#appender3:hover&#123;
+     			color: #f80 !important; 
+     			background-color: #efefef !important;
+     		&#125;
+     	&lt;/style&gt;
+     */
+    var baseStyle = 'border: 1px solid #666 !important; border-radius: 12px !important; padding: 10px !important; '
+    				+ 'cursor: pointer !important; font-size: 11px !important; font-family: verdana !important;';
+    arrayFields[i] = new Styler(['.stylerToAppender1','.stylerToAppender2','#appender3',
+                                 '.stylerToAppender5','.stylerToAppender6','#appender7',
+                                 '#appender8 .rockerTableColumn',
+                                 '.stylerToAppender1:hover,.stylerToAppender2:hover,#appender3:hover',
+                                 '.stylerToAppender5:hover,.stylerToAppender6:hover,#appender7:hover'],
+    							[ baseStyle + 'color: #515377 !important; background-color: #eaffaa !important;',
+    							  baseStyle + 'color: #171605 !important; background-color: #aafffb !important;',
+    							  baseStyle + 'color: #ff0047 !important; background-color: #aaebff !important;',
+    							  baseStyle + 'color: #c5142c !important; background-color: #b9e62f !important; font-size: 14px !important; font-family: Segoe UI !important;',
+    							  baseStyle + 'color: #171605 !important; background-color: #aafffb !important; font-size: 14px !important; font-family: Segoe UI !important;',
+    							  baseStyle + 'color: #ff0047 !important; background-color: #aaebff !important; font-size: 14px !important; font-family: Segoe UI !important;',
+    							  'border-right: 0px !important;',
+    							  'color: #f80 !important; background-color: #efefef !important;',
+    							  'color: #01f !important; background-color: #ffffff !important;'
+    							]);
+    i++;
+    
+    
+    /**
+        getTextAllowedsValidator = function(arrayCharAlloweds,maxChars,minChars)
+        you can use your custom char array: var allowedChars = ['A','B','C','e', ... ];
+     */
+    var nameValidator = singletonRockerFormValidator.getTextAllowedsValidator(singletonRockerFormValidator.alfaNumsText,250,3);
+    /**
+	    InputText = function (label,name,defaultValue,width,validator,placeHolder,
+			disabled,bootstrapClass,bootstrapNewLine)
+	*/
+    arrayFields[i] = new InputText('Rock Star Name','name','',130,nameValidator,
+    							   'Rock Star Name Here',false,'col-md-2',true);
+    i++;
+    
+    var nickNameValidator = new RockerCustomValidator();
+    // you should override the 'validate' function to provide custom validations, otherwise this validate nothing.
+    nickNameValidator.validate = function(stringValue)&#123;
+		if(null == stringValue || singletonRockerCommons.trim(stringValue).length &lt; 3)&#123; // dont forget the validation message (i18n or not)
+			nickNameValidator.validationMsg = 'Oh woow!! Nickname is required and need 3 or more chars!';
+			return false;
+		&#125;
+		return true;
+	&#125;;
+    arrayFields[i] = new InputText('Rockstar Nickname','nickname','',130,nickNameValidator,
+			   'Rock Star Nickname',false,'col-md-2',false);
+    i++;
+
+    
+    /**
+	    getTextMaskValidator = function(arrayMaskCharPositions)
+	    possible values in each array position:
+	    	- simple chars 
+	    	- null or * 
+	    	- [0-9] 
+	    	- [a-z]
+	    	- [a-z][0-9] or [0-9][a-z]
+	 */
+	var dateValidator = singletonRockerFormValidator.getTextMaskValidator(['[0-9]','[0-9]','/','[0-9]','[0-9]','/','[0-9]','[0-9]','[0-9]','[0-9]']);
+	// you can override the 'validate' function to provide custom validations
+	dateValidator.validate = function(stringValue)&#123;
+		var msg = singletonRockerValidatorData.validateDate(singletonRockerCommons.trim(stringValue));
+		if(null != msg && msg != '')&#123; // dont forget the validation message (i18n or not)
+			dateValidator.validationMsg = singletonRockerI18n.getMessage('InputText.invalidDate',['Date of Birth',msg]);
+			return false;
+		&#125;
+		return true;
+	&#125;;
+	/**
+	    InputText = function (label,name,defaultValue,width,validator,placeHolder,
+							disabled,bootstrapClass,bootstrapNewLine)
+			
+		You can use a custom place holder changing null to an value to use a custom place holder for masks.
+	*/
+	arrayFields[i] = new InputText('Date of Birth','birthdate','',100,dateValidator,null,
+			false,'col-sm-2',false);
+	i++;
+    
+
+    /**
+       Select = function (label,name,defaultValue,arrayValues,arrayLabels,canBeEmpty,
+						width,onchange,onclick,disabled,bootstrapClass,bootstrapNewLine)
+    */
+    arrayFields[i] = new Select('Musical Style','style','',['classicrock','poprock','hardrock','metal','heavymetal'],
+    											  ['Classic Rock','Pop Rock','Hard Rock','Metal','Heavy Metal'],false,
+    											  120,'console.log(\'onchange\');','console.log(\'onclick\');',false,'col-md-2',false);
+    i++;
+    
+    /**
+       getTextIntValidator = function(americanFormat,maxChars,minChars)
+    */
+    var validator2 = singletonRockerFormValidator.getTextIntValidator(false,2,1);
+    /** */
+    arrayFields[i] = new InputText('Age','age','',50,validator2,false,
+    		false,'col-md-1',false);
+    i++;
+    
+    /**
+	    getTextDoubleValidator = function(americanFormat,maxChars,minChars,integerDigits,decimalDigits)
+	*/
+	var validator3 = singletonRockerFormValidator.getTextDoubleValidator(false,5,2,3,2);
+	/** */
+	arrayFields[i] = new InputText('Rating','rating','',70,validator3,'100,88',
+	 		false,'col-md-1',false);
+	i++;
+	
+	
+	/**
+		RadioGroup = function (label,name,arrayLabels,arrayValues,defaultValue,nullable,bootstrapClass,bootstrapNewLine)
+	 */
+	arrayFields[i] = new RadioGroup('Was born in England?','bornengland',
+			['Yes','No'],[true,false],
+			false,false,'col-sm-2',true);
+	i++;
+	
+	/**
+		CheckGroup = function (label,name,arrayCheckLabels,arrayCheckNames,arrayCheckCheckeds,minChecks,bootstrapClass,bootstrapNewLine)
+	 */
+	arrayFields[i] = new CheckGroup('Preferences','preferences',
+			['Pizza','Orange Juice', 'Milk', 'Apple'],['pizza','orangejuice', 'milk', 'apple'],
+			[true,false,false,'true'],1,'col-sm-2',false);
+	i++;
+	
+	
+	/**
+		UpperFile = function (id,label,value,width,height,appenderId,actionBaseForm,titleUploaderForm,top,left,
+									hideInputField,validExtensions,onbeforeOpen,bootstrapClass,bootstrapNewLine)
+									
+		Creates a input file to upload, that simulates an 'ajax submit'
+	 */
+	var onbeforeOpen = 'if(singletonRockerCommons.getElement(\'id\').value &lt;= 0)&#123; alert(\'Rockstar yet dont was saved!\'); return false;&#125;';
+	//if a rockstar is new Object (dont have a id into a input hidden 'id'), dont open the photo upload form
+	arrayFields[i] = new UpperFile('rockstarPhoto','Rock Star PHOTO','',170,200,
+									'appenderBase',this.actionForm,'Choice a Rock Star Photo',20,30,
+									false,['png','gif','pdf'],onbeforeOpen,'col-sm-3',false);
+	i++;
+	
+	
+	/**
+	 	UpperFileS3 = function (id,label,value,width,height,appenderId,titleUploaderForm,top,left,hideInputField,validExtensions,onbeforeOpen,
+								maxSize,delayTimeMsgs,s3user,s3password,s3region,s3bucket,s3BaseUrl,fixedFileName,fileNamePrefix,
+								bootstrapClass,bootstrapNewLine)
+								
+		Creates a input file to upload, that simulates an 'ajax submit', to send files to an Amazon AWS S3 bucket
+		
+		this component need a AWS third party library:
+		use &lt;script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.0-rc.20.min.js"&gt;&lt;/script&gt;
+		in your HTML page. (May be a newer version too).
+		
+		maxSize: in Bytes
+		delayTimeMsgs: time to hide alert msgs after them are show - miliseconds
+		s3user: S3 bucket acount user
+		s3password: S3 bucket acount password
+		s3region: S3 bucket region
+		s3bucket: S3 bucket name
+		s3BaseUrl: S3 bucket url 
+		
+		When in serious applications use other forms of obtain the 5 S3 parameters, for example a cripted web service.
+		
+		fixedFileName: set a value not null and not equal to '' , 
+					   if you want keep the uploaded images whit same name in S3 bucket on each time upload
+					   could be a javascript function result - use \\\' to scape the ' 
+		fileNamePrefix: set a value not null and not equal to '' , 
+		                if you want a prefix for each user that upload the file to identify the respective owner for example
+		                could be a javascript function result - use \\\' to scape the ' 
+	 */
+	var onbeforeOpenS3 = 'if(singletonRockerCommons.getElement(\'id\').value &lt;= 0)&#123; alert(\'Rockstar yet dont was saved!\'); return false;&#125;';
+	//if a rockstar is new Object (dont have a id into a input hidden 'id'), dont open the photo upload form
+	var s3user = ''; //your AWS S3 user. 
+	var s3password = ''; //your AWS S3 password. 
+	var s3region = 'us-west-2'; //your AWS S3 bucket region. 
+	var s3bucket = ''; //your AWS S3 bucket name. 
+	var s3BaseUrl = 'https://s3-us-west-2.amazonaws.com'; //your AWS S3 base url. 
+	var fixedFileName = '\\\'rockstarPhotoOf_\\\' + singletonRockerCommons.getElement(\\\'id\\\').value'; 
+	var fileNamePrefix = 'singletonRockerCommons.getElement(\\\'owner\\\').value + \\\'_\\\';';
+	arrayFields[i] = new UpperFileS3('rockstarPhotos3','Rock Star PHOTO S3','',170,200,'appenderBase','Choice a Rock Star Photo',20,30,false,['png','gif','pdf'],
+			  onbeforeOpenS3,
+			 (1024 * 1024),2500,s3user,s3password,s3region,s3bucket,s3BaseUrl,fixedFileName,fileNamePrefix,
+			'col-sm-3',false);
+	i++;
+	
+    /**
+       getTextForbiddenValidator = function(arrayCharForbidden,maxChars,minChars)
+     */
+    var forbiddenChars = ['!','@','&','%','+'];
+    var validator3 = singletonRockerFormValidator.getTextForbiddenValidator(forbiddenChars,300,20);
+    /**
+	 	TextArea = function (label,name,defaultValue,cols,rows,width,validator,usingCompletation,
+			richEditor,readonly,placeHolder,bootstrapClass,bootstrapNewLine)
+	*/
+    arrayFields[i] = new TextArea('Biography (Forbidden chars: !,@,&,%,+)','biography','',300,5,800,validator3,true,
+			true,false,'Rock Star Biography','col-md-12',false);
+    i++;
+    
+    /**
+	 	Appender = function (id,style,clazz,onclick,position,newTabTitle,arrayFields,bootstrapClass,bootstrapNewLine) 
+	 	
+	 	Creates a internal DIV appender element (internal to a RockerForm).
+	 	A Appender creates a DIV element whit the specified 'id', in the relative position to other elements of 'arrayFields'.  
+	 	This is useful to create dinamic elements (add a new element on execution time) into a RockerForm, after he was created.
+	 	Observe 'this.draw()' method to better understanding.
+	 	
+	 	Valid values to 'position' : ['topTable','bottomTable','topFields','bottomFields','bottomForm']
+	 	try each one of them for better understanding
+	 	
+	 	- newTabTitle: title to draw the appender into a new BootstrapTab whit this title. 
+	 	  If his value is null or the RockerForm[tableOnNewTab] is false, the appender is drawed according the 'position' 
+	 	  rule.
+	 	  
+	 	- arrayFields: a list of components to append into appender and not directly in form.
+	 	  Pay atention:
+	 	  	- If the appender is outside of the form ( in a other tab for example ), these components are too outside of the form.
+	 	  	- Use 'topFields' or 'bottomFields' to append input data elements whit the Appender into a form.
+	 	  	- In all cases its strongly recommended that input data elements stay directly in main 'arrayFields' element of the form.
+	 	  	- Recommended use of Appender is for special elements construction.
+	*/
+    arrayFields[i] = new Appender('appender1','background-color: #000;','stylerToAppender1','alert(\'click on: [appender1]\');','bottomTable',null,null,'col-sm-3',true);
+    i++;
+    
+    arrayFields[i] = new Appender('appender2',null,'stylerToAppender2','alert(\'click on: [appender2]\');','bottomTable',null,null,'col-sm-3',false);
+    i++;
+    
+    arrayFields[i] = new Appender('appender3',null,null,'alert(\'click on: [appender3]\');','bottomTable',null,null,'col-sm-3',false);
+    i++;
+    
+    var j = 0;
+    var arrayFieldsAppender4 = [];
+    /**
+		Spacer = function (height,hexColorCode)
+		Creates a spacial element to help organize visually the layout/elements.
+	*/
+    arrayFieldsAppender4[j] = new Spacer(1,'36d43b','col-sm-1',true);
+	j++;
+	/**
+	 	Label = function (value,Spacers,bootstrapClass,bootstrapNewLine)
+	 */
+	arrayFieldsAppender4[j] = new Label('&lt;strong&gt;Example of use of &lt;span style="color: #01f; font-family: \'Segoe UI\'; font-size: 11px;"&gt;' 
+								+ 'additionalParamsAndValuesOnRequestTable&lt;/span&gt; parameter on form/table&lt;/strong&gt;',0,'col-md-7',false);
+	j++;
+	
+	
+	/** 
+	  	Using a Spacer as a Line Separator.
+	*/
+	arrayFieldsAppender4[j] = new Spacer(1,'36d43b','col-sm-1',false);
+	j++;
+	
+	
+	/**
+	 	Using a Spacer as element mover.
+	 */
+	arrayFieldsAppender4[j] = new Spacer(0,null,'col-sm-1',true);
+	j++;
+	
+	/**
+	 	Button = function (id,value,onclick,style,bootstrapClass,bootstrapNewLine)
+	 	
+	 	- Pay atention here, to understand the 'additionalParamsAndValuesOnRequestTable' parameter functionality
+	 */
+	arrayFieldsAppender4[j] = new Button('btRockstarsCurrentUser',
+								'See Only Rock Stars Created by Me',
+								'singletonInstance.showOnlyRockstarsFromCurrentUser(); ',
+								'background-color: #ff0 !important; color: #f63 !important;',
+								'col-md-2',false);
+	j++;
+	
+	/**
+	 	Using a Spacer as element mover.
+	 */
+	arrayFieldsAppender4[j] = new Spacer(0,null,'col-sm-1',false);
+	j++;
+	
+	/**
+	 	Button = function (id,value,onclick,style,bootstrapClass,bootstrapNewLine)
+	 	
+	 	- Pay atention here, to understand the 'additionalParamsAndValuesOnRequestTable' parameter functionality
+	 */
+	arrayFieldsAppender4[j] = new Button('btAllRockstarsAllUsers',
+			'See Rock Stars From All Users',
+			'singletonInstance.showAllRockstarsFromAllUsers(); ',
+			'background-color: #ff0 !important; color: #f63 !important;',
+			'col-md-4',false);
+	j++;
+	
+	/** 
+		Using a Spacer as a Line Separator.
+	*/
+	arrayFieldsAppender4[j] = new Spacer(2,'7fd0e2','col-md-9',true);
+	j++;
+	
+	
+	/**
+	 	Special Appender into another Appender
+	 	Pay attention here will draw a table outside a form.
+	 */
+	arrayFieldsAppender4[j] = new Appender('appender8',null,null,'null',null,null,null,'col-sm-9',true);
+	j++;
+
+	
+	/**
+	 	Special Appender into another Appender
+	 */
+	arrayFieldsAppender4[j] = new Appender('appender5','background-color: #000;','stylerToAppender5','alert(\'click on: [appender5]\');',null,null,null,'col-sm-3',true);
+    j++;
+    
+    /**
+	 	Special Appender into another Appender
+	 */
+    arrayFieldsAppender4[j] = new Appender('appender6',null,'stylerToAppender6','alert(\'click on: [appender6]\');',null,null,null,'col-sm-3',false);
+    j++;
+    
+    /**
+	 	Special Appender into another Appender
+	 */
+    arrayFieldsAppender4[j] = new Appender('appender7',null,null,'alert(\'click on: [appender7]\');',null,null,null,'col-sm-3',false);
+    j++;
+    
+	
+	arrayFields[i] = new Appender('appender4',null,null,'alert(\'click on: [appender4]\');',null,'Elements of appender4',arrayFieldsAppender4,'col-sm-3',false);
+    i++;
+    
+    return arrayFields;
+  &#125;;
+
+  this.getArrayTableColumns = function(toBeInternalIntoForm)&#123;
+	
+	var arrayTableColumns = [];
+	
+	if(toBeInternalIntoForm)&#123;
+		/**
+		 * Column labels 
+		 * 		- Last position is always destined for a "actions" column
+		 */
+	    arrayTableColumns[0] = ['Rockstar Name','Birth Date','Age' ,'Musical Style','Owner User','Actions'];
+	    
+		/**
+		 * Attributes relateds to labels 
+		 * 		- Last position is always destined for a "actions" column - use ''
+		 */
+	    arrayTableColumns[1] = ['name','birthdate','age','style','owner',''];
+	    
+	    /**
+	     * width of each table column.
+	     * 		- A negative value make the filter input disable whit same width received.
+	     * 		- Zero value the input filter will not exists.
+	     * 		- String values separated by ',' (comma) make the conversion of input filter to a select list filter
+	     *      with this determined values. Example: 
+	     *    		- 'classicrock,poprock,hardrock,metal,heavymetal' change into  ['classicrock','poprock','hardrock','metal','heavymetal']
+	     *      - Last position is always destined for a "actions" column - use '0'
+	     */
+	    arrayTableColumns[2] = [290,-130,60,'classicrock,poprock,hardrock,metal,heavymetal',120,'0'];
+	    
+	    /**
+	     * Use column ordering ASC and DESC
+	     * 		- Last position is always reserved for a "actions" column - use 'false'
+	     */
+	    arrayTableColumns[3] = ['true','false','true','true','true','false'];
+	    
+	    /**
+	     * Specific css class names for each column (when exists)
+	     * 		- Last position is always destined for a "actions" column
+	     */
+	    arrayTableColumns[4] = ['','','','','font: Segoe UI italic 10px !important;',''];
+	    
+	    /**
+	     * Inline css styles for each column (when required)
+	     * 		- Last position is always destined for a "actions" column
+	     */
+	    arrayTableColumns[5] = [
+	                            'width: 300px; text-align: left;',
+	                            'width: 140px; text-align: left;',
+	                            'width: 70px; text-align: right;',
+	                            'width: 150px; text-align: left;',
+	                            'width: 130px; text-align: left;',
+	                            'width: 80px; text-align: left;'
+	                           ];
+	    /**
+	     * Internal column text inline css styles for each column (when required) - text aligning
+	     * 		- Last position is always destined for a "actions" column
+	     */
+	    arrayTableColumns[6] = ['margin-left: 10px;',
+	                            'margin-left: 10px;',
+	                            'margin-right: 15px;',
+	                            'margin-left: 10px;',
+	                            'margin-left: 10px;',
+	                            'margin-left: 10px;'
+	                            ];
+	   
+	    
+	    /**
+	    	Creates one or more aditional buttons on 'actions' column of the table.
+	    	
+	    	3 + 4 positions call the method [showBiography(this.owner,'id');] on object singletonInstance.
+	     */
+	    var arrayAditionalButtonsTable = [];
+	  
+	    var arrayBtAd0 = [];
+	    arrayBtAd0[0] = '';// inline style - try background-color: #f1f0ec !important; border-color: #ccc !important; too see
+	    arrayBtAd0[1] = 'ui-icon-search';// style class
+	    arrayBtAd0[2] = 'Show biography';// title
+	    arrayBtAd0[3] = 'singletonInstance.showBiography(' + this.owner + ');';//onclick: beetween ( and ) put the additional parameters name separated by ',' (comma)
+	    arrayBtAd0[4] = ['id'];// atribute of json object returned, should be a column value of a table or 'id'. 
+	    arrayAditionalButtonsTable[0] = arrayBtAd0;
+	    
+	    arrayTableColumns[7] = arrayAditionalButtonsTable;
+	&#125;else&#123;
+	    arrayTableColumns[0] = ['Rockstar Name','Biography','Actions'];
+	    arrayTableColumns[1] = ['name','biography',''];
+	    arrayTableColumns[2] = [290,-410,'0'];
+	    arrayTableColumns[3] = ['true','false','false'];
+	    arrayTableColumns[4] = ['','',''];
+	    arrayTableColumns[5] = [
+	                            'width: 300px; text-align: left;',
+	                            'width: 420px; text-align: left;',
+	                            'width: 50px; text-align: left;'
+	                           ];
+	    /**
+	     * Internal column text inline css styles for each column (when required) - text aligning
+	     * 		- Last position is always destined for a "actions" column
+	     */
+	    arrayTableColumns[6] = ['margin-left: 10px;',
+	                            'margin-left: 10px;',
+	                            'margin-left: 5px;'
+	                            ];
+	   
+	    
+	    /**
+	    	Creates one or more aditional buttons on 'actions' column of the table.
+	    	
+	    	3 + 4 positions call the method [showBiography(this.owner,'id');] on object singletonInstance.
+	     */
+	    var arrayAditionalButtonsTable = [];
+	  
+	    var arrayBtAd0 = [];
+	    arrayBtAd0[0] = '';// inline style - try background-color: #f1f0ec !important; border-color: #ccc !important; too see
+	    arrayBtAd0[1] = 'ui-icon-search';// style class
+	    arrayBtAd0[2] = 'Show biography';// title
+	    arrayBtAd0[3] = 'singletonInstance.showPhoto();';//onclick: beetween ( and ) put the additional parameters name separated by ',' (comma)
+	    arrayBtAd0[4] = ['id'];// atribute of json object returned, should be a column value of a table or 'id'. 
+	    arrayAditionalButtonsTable[0] = arrayBtAd0;
+	    
+	    arrayTableColumns[7] = arrayAditionalButtonsTable;
+	&#125;
+	
+    return arrayTableColumns;  
+  &#125;;
+
+ 
+  this.drawAppenders = function()&#123;
+	  // 
+	  var innerAppender1 = '&lt;p&gt;';
+	  innerAppender1 += 'She\'s got a smile it seems to me&lt;br/&gt;';
+	  innerAppender1 += 'Reminds me of childhood memories&lt;br/&gt;';
+	  innerAppender1 += 'Where everything&lt;br/&gt;';
+	  innerAppender1 += 'Was as fresh as the bright blue sky&lt;br/&gt;';
+	  innerAppender1 += 'Now and then when I see her face&lt;br/&gt;';
+	  innerAppender1 += 'She takes me away to that special place&lt;br/&gt;';
+	  innerAppender1 += 'And if I\'d stare too long&lt;br/&gt;';
+	  innerAppender1 += 'I\'d probably break down and cry&lt;br/&gt;';
+	  innerAppender1 += '&lt;br/&gt;';
+	  innerAppender1 += 'Sweet Child O\'Mine (Gun\'s Roses)&lt;br/&gt;';
+	  innerAppender1 += '&lt;/p&gt;';
+	  
+	  
+	  var innerAppender2 = '&lt;p&gt;';
+	  innerAppender2 += 'Shed a tear \'cause I\'m missin\' you&lt;br/&gt;';
+	  innerAppender2 += 'I\'m still alright to smile&lt;br/&gt;';
+	  innerAppender2 += 'Girl, I think about you every day now&lt;br/&gt;';
+	  innerAppender2 += 'Was a time when I wasn\'t sure&lt;br/&gt;';
+	  innerAppender2 += 'But you set my mind at ease&lt;br/&gt;';
+	  innerAppender2 += 'There is no doubt you\'re in my heart now&lt;br/&gt;';
+	  innerAppender2 += '&lt;br/&gt;';
+	  innerAppender2 += '&lt;em&gt;Patience (Gun\'s Roses)&lt;/em&gt;&lt;br/&gt;';
+	  innerAppender2 += '&lt;/p&gt;';
+	  
+	  
+	  var innerAppender3 = '&lt;p&gt;';
+	  innerAppender3 += 'Born to raise hell, born to raise hell&lt;br/&gt;';
+	  innerAppender3 += 'We know how to do it and we do it real well&lt;br/&gt;';
+	  innerAppender3 += 'Born to raise hell, born to raise hell&lt;br/&gt;';
+	  innerAppender3 += 'Voodoo medicine, cast my spell&lt;br/&gt;';
+	  innerAppender3 += 'Born to raise hell, born to raise hell&lt;br/&gt;';
+	  innerAppender3 += 'Play that guitar just like ringin\' a bell&lt;br/&gt;';
+	  innerAppender3 += 'Take it or leave it&lt;br/&gt;';
+	  innerAppender3 += '&lt;br/&gt;';
+	  innerAppender3 += '&lt;em&gt;Born to raise hell (Motörhead)&lt;/em&gt;&lt;br/&gt;';
+	  innerAppender3 += '&lt;/p&gt;';
+	  
+	  singletonRockerCommons.innerHtml('appender1',innerAppender1);
+	  singletonRockerCommons.innerHtml('appender2',innerAppender2);
+	  singletonRockerCommons.innerHtml('appender3',innerAppender3);
+	  
+	  
+	  singletonRockerCommons.innerHtml('appender5',innerAppender1);
+	  singletonRockerCommons.innerHtml('appender6',innerAppender2);
+	  singletonRockerCommons.innerHtml('appender7',innerAppender3);
+	  
+	  
+	  //drawing a special table outside/independent of a RockerForm
+	  /**
+	    var RockerTable = function(idToInner,title,maxPageButtons,arrayTableColumns,baseActionFilterAndLoad,typeObject,
+						deleteAndEditButtons,nameForm,idToInnerForm,requestUpdateOnSetRows,additionalParamsAndValuesOnRequest,printAllowed,onRead)&#123;
+						
+		For interaction whit a RockerForm, its strongly recommended use the RockerTable provided by a RockerForm.
+	   */
+	  
+	  var rockerTable = new RockerTable('appender8','All Rockstars - On a independent RockerTable',
+				2,this.getArrayTableColumns(false),
+			this.actionForm,this.typeObject,false,null,
+			null,true,this.additionalParamsAndValuesOnRequestTable,false,null);
+			
+	  new RockerVisualCoder('appender9',this.width - 15);
+	  singletonRockerCommons.hide('appender9');
+	  
+  &#125;;
+  
+  this.draw = function()&#123;
+	  
+	  // See the console log, this show a use of obfuscation string array
+	  new ShaffroindExampler();
+	  
+	  // See the console log, this show a simple way to use RockerAjaxHandler to make ajax requests and handle 
+	  // the result on callback functions
+	  new ExampleOfUseOfAjaxHandler(this.actionForm);
+	  
+	  /**
+	  		RockerForm = function(title,idAppenderForm,horizontalAlignFields,width,closable,modal,arrayFields,
+							actionForm,onclickSubmit,onclickCancel,textSubmit,textCancel,errorCode,jsonCode,
+							posTop, posLeft, titleTable, arrayTableColumns,typeObject,
+							additionalParamsAndValuesOnRequestTable,onclose,drawTableOnTop,minimizable,
+							initialLineNumbersTable,heightToggle,visibleButtonsTable,deleteAndEditButtonsOnTable,
+							tableOnNewTab,onRead
+							)
+							
+	  		A RockerForm whitout a RockerTable is possible, then should pass a 'null' into a place of 'this.getArrayTableColumns(true)',
+	  		but this no make sense in almost of cases.
+	   */
+	  this.singletonInstanceForm = new RockerForm(this.title,this.idAppenderForm,this.horizontalAlignFields,this.width,this.closable,this.modal,this.getArrayFields(),
+				this.actionForm,this.onclickSubmit,this.onclickCancel,this.textSubmit,this.textCancel,this.errorCode,this.jsonCode,
+				this.posTop, this.posLeft, this.titleTable, this.getArrayTableColumns(true),this.typeObject,this.aliasObject,
+				this.additionalParamsAndValuesOnRequestTable,this.onclose,this.drawTableOnTop,this.minimizable,
+				this.initialLineNumbersTable,this.heightToggle,this.visibleButtonsTable,this.deleteAndEditButtonsOnTable,
+				this.tableOnNewTab,this.onRead
+				);
+	  
+	  this.drawAppenders();
+  &#125;;
+  
+  this.draw();
+  // this.drawAppenders(); - here works too - the important is the form already be drawed.
+  
+  singletonInstance = this;
+  
+&#125;;
+
+	</pre>
+		</div>
+	</div>
+	
+	<div class="ui-corner-all" style="margin: 0px 10px 0px 10px;">
+		<div class="ui-widget-header ui-corner-top" style="padding: 5px; text-align: center;">
+			node.js.appserver.js File
+		</div>
+		<div class="ui-corner-bottom">
+	<pre>
+	<code>
+	/**
+	   The application server based on Node JS tecnology.
+	   
+	   Go the command pront and type
+	   node &lt;path to this file&gt; then this server should be running.
+	   The message on command prompt should be 'Node JS server initiated on localhost:4000.'
+	*/
+	var nodeJsHttp = require('http');
+	var urlHandler = require('url');
+	var qs = require('querystring');
+	var fs = require('fs');
+	/**
+	 	npm install express
+	 */
+	var express = require('express');
+	/**
+		npm install formidable
+	 */
+	var formidable = require('formidable');
+	var util = require('util');
+	var path = require('path');
+	
+	var responseHeaders = &#123; 'Content-Type': 'text/html; charset=utf-8',
+							'Access-Control-Allow-Origin':'*',
+							'Access-Control-Allow-Headers':'X-Requested-With'
+						  &#125;;
+	var serverPort = 4000;
+	var nodeJsHttpServer = nodeJsHttp.createServer();
+	
+	nodeJsHttpServer.on('request', 
+		  function(req,res) &#123;
+				var urlObject = urlHandler.parse(req.url);
+		        var pathname = urlObject.pathname;
+		        var dataQuery = null;
+		        var result = '';
+				if(req.method=='POST') &#123;
+					if(pathname.indexOf('/upload') &gt; 0)&#123;
+						handleUpload(req,res,pathname);
+					&#125;else if(pathname.indexOf('/rockstars/uploads') == 0)&#123;
+						//console.log(urlObject);
+						var urlFile = '.' + pathname.substring(pathname.indexOf('/uploads'));
+						//console.log('urlFile =&gt; ' + urlFile);
+						var filePath = path.join(__dirname, '/../' + urlFile);
+						var stat = fs.statSync(filePath);
+						res.writeHead(200, &#123;
+						        'Content-Type': getExtensionMime(urlFile),
+						        'Content-Length': stat.size
+						&#125;);
+						var readStream = fs.createReadStream(filePath);
+						readStream.pipe(res);
+					&#125; else&#123;
+						var body='';
+				        req.on('data', function (data) &#123;
+				        	//console.log(data.name);
+				            body +=data;
+				        &#125;);
+				        req.on('end',function()&#123;
+				        	body = replaceAll(body,'?','');
+				        	dataQuery =  qs.parse(body);
+				        	result = handleData(pathname,dataQuery);
+				        	res.writeHead(200, responseHeaders); 
+							res.end(result);
+				        &#125;);
+					&#125;
+				&#125;else if(req.method=='GET') &#123;
+					if(pathname.indexOf('/rockstars/uploads') == 0)&#123;
+						//console.log(urlObject);
+						var urlFile = '.' + pathname.substring(pathname.indexOf('/uploads'));
+						//console.log('urlFile =&gt; ' + urlFile);
+						var filePath = path.join(__dirname, '/../' + urlFile);
+						var stat = fs.statSync(filePath);
+						res.writeHead(200, &#123;
+						        'Content-Type': getExtensionMime(urlFile),
+						        'Content-Length': stat.size
+						&#125;);
+						var readStream = fs.createReadStream(filePath);
+						readStream.pipe(res);
+					&#125;else&#123;
+						dataQuery = urlHandler.parse(req.url,true).query;
+					    result = handleData(pathname,dataQuery);
+					    res.writeHead(200, responseHeaders); 
+						res.end(result);
+					&#125;
+				    
+				&#125;
+		  &#125;
+	);
+	nodeJsHttpServer.listen(serverPort);
+	console.log('Node JS server initiated on localhost:' + serverPort + '.');
+	
+	function getExtensionMime(path)&#123;
+		var idx = path.lastIndexOf('.');
+		var ext = path.substring(idx + 1);
+		var mime = '';
+		if(ext == 'jpg' || ext == 'jpeg')&#123;
+			mime = 'image/jpeg';
+		&#125;else if(ext == 'png')&#123;
+			mime = 'image/png';
+		&#125;else if(ext == 'gif')&#123;
+			mime = 'image/gif';
+		&#125;else if(ext == 'bmp')&#123;
+			mime = 'image/bmp';
+		&#125;else if(ext == 'pdf')&#123;
+			mime = 'application/pdf';
+		&#125;else if(ext == 'doc' || ext == 'docx')&#123;
+			mime = 'application/msword';
+		&#125;
+		//console.log('mime =&gt; ' + mime);
+		return mime;
+	&#125;;
+	
+	
+	/**
+	 * Auxiliar functions
+	 */
+	function replaceAll(str, searched, replacer)&#123;
+		var pos = str.indexOf(searched);
+		while (pos != -1)&#123;
+			str = str.replace(searched, replacer);
+			pos = str.indexOf(searched);
+		&#125;
+		return str;
+	&#125;;
+	
+	
+	/**
+	 	See https://www.npmjs.com/package/formidable
+	 */
+	function handleUpload(req,res,pathname)&#123;
+		var form = new formidable.IncomingForm();
+		form.encoding = 'utf-8';
+		if(pathname.indexOf('/rockstars') == 0)&#123;
+			form.uploadDir = "./uploads/rockstars";
+		&#125;else&#123;
+			form.uploadDir = "./uploads";
+		&#125;
+		form.keepExtensions = true;
+		form.maxFieldsSize = 2 * 1024 * 1024;// in bytes
+		form.maxFields = 100; 
+		form.type = 'multipart';
+		form.multiples = false;
+		//
+		var formid = '';
+		var typeObject = '';
+		form.on('field', function(name, value) &#123;
+			if(name == 'operation')&#123;
+				operation = value;
+			&#125;else if(name=='typeObject')&#123;
+				typeObject = value;
+			&#125;else if(name=='formid')&#123;
+				formid = value;
+			&#125;
+		&#125;);
+		
+		var filenames = new Array();
+		form.on('file', function(name, file) &#123;
+			filenames[filenames.length] = name;
+		&#125;);
+		
+		form.parse(req, function(err, fields, files) &#123;
+			for(var i = 0; i &lt; filenames.length; i++)&#123;
+				 storeUploadResult(formid,typeObject,files[filenames[i]].path);
+			&#125;
+			res.writeHead(200, responseHeaders); 
+			res.end('Upload received.');
+	    &#125;);
+	&#125;;
+	
+	function storeUploadResult(formid,typeObject,filepath)&#123;
+		var uploadInfo = [
+				              formid,
+				              typeObject,
+				              filepath
+				             ];
+		storeData(uploadInfo);
+	&#125;;
+	
+	
+	/**
+	 *  Emulation of a [Controller] for simplification
+	 */
+	function handleData(pathname,dataQuery)&#123;
+		var result = '';
+		if(dataQuery.operation == 'exampleOfUseOfAjaxHandler')&#123;
+			result = '';
+			if(null==dataQuery.expected || undefined==dataQuery.expected || dataQuery.expected=='')&#123;
+				result = 'null';
+			&#125;else if(dataQuery.expected == 'OK')&#123;
+				result = 'OK';
+			&#125;else if(dataQuery.expected == 'ERROR')&#123;
+				result = 'ERROR';
+			&#125;else &#123;
+				result = 'returning another data result ...';
+			&#125;
+			return result;
+		&#125;
+		if(dataQuery.operation == 'uploadResult')&#123;
+			//console.log(dataQuery);
+			var dataArrayUpload = getData(dataQuery.formid,dataQuery.typeObject);
+			if(null!=dataArrayUpload && null!=dataArrayUpload[0])&#123;
+				result = dataArrayUpload[0][2];
+				result = replaceAll(result,'\\','/');
+				dropData(dataQuery.formid,dataQuery.typeObject);//remove from data array
+			&#125;else&#123;
+				result = '';
+			&#125;
+			return result;// the upload component wait for a string containing the relativePath of a uploaded file relative to the server root.
+		&#125;
+		if(pathname.indexOf('/rockstars') == 0)&#123;
+			if(null!=dataQuery.operation)&#123;
+				if(dataQuery.operation == 'store')&#123;
+					result = 'Rockstar sucessfully ' + storeData(createDataArray(dataQuery)) + '!';
+				&#125;else if(dataQuery.operation == 'filterAndLoad')&#123;
+					var sortTableAsc = (null!=dataQuery.sortTableAsc && dataQuery.sortTableAsc == 'true');
+					var sortTableDesc = (null!=dataQuery.sortTableDesc && dataQuery.sortTableDesc == 'true');
+					var selectedPage = dataQuery.selectedPage;
+					var selectedRows = dataQuery.selectedRows;
+					var numberFilterParams = dataQuery.numberFilterParams;
+					var filterParams = new Array();
+					for(var i = 0; i &lt; numberFilterParams; i++)&#123;// dinamic filter according input fields on table header
+						filterParams[filterParams.length] = [dataQuery[ 'attr' + i],dataQuery[ 'valueAttr' + i],null];
+					&#125;
+					for(var i = 0; i &lt; 100; i++)&#123;// fixed filterParams (hard code) on request. 
+												 // see [additionalParamsAndValuesOnRequest] on RockerFom/RockerTable constructor call. 
+						if(undefined==dataQuery[ 'additionalAtrr' + i] || null==dataQuery[ 'additionalAtrr' + i])&#123;
+							break;
+						&#125;
+						filterParams[filterParams.length] = [
+						                                     dataQuery[ 'additionalAtrr' + i],
+						                                     dataQuery[ 'valueAdditionalAtrr' + i],
+						                                     ((dataQuery[ 'additionalAtrrEqual' + i] == 'true') ? true : false)
+						                                     ];
+					&#125;
+					//console.log(filterParams);
+					var allDataArray = getData(null,dataQuery.typeObject);
+					var idxBegin = selectedRows * (selectedPage - 1);
+					var idxEnd = idxBegin + selectedRows - 1;
+					var jsonReturn = '';
+					if(null!=allDataArray)&#123;
+						var filteredData = new Array();
+						var sortedData = new Array();
+						var paginatedData = new Array();
+						for(var i = 0; i &lt; allDataArray.length; i++)&#123;
+							if(passOnFilterData(allDataArray[i],dataQuery.typeObject,filterParams))&#123;
+								filteredData[filteredData.length] = allDataArray[i];
+							&#125;
+						&#125;
+						// sorting block 
+						if(sortTableAsc)&#123;
+							sortedData = sortData(filteredData, dataQuery.typeObject, dataQuery.attributeAsc, true);
+						&#125;else if(sortTableDesc)&#123;
+							sortedData = sortData(filteredData, dataQuery.typeObject, dataQuery.attributeDesc, false);
+						&#125;else &#123;
+							sortedData = filteredData;
+						&#125;
+						//console.log(sortedData);
+						// sorting block end
+						for(var i = idxBegin; i &lt;= idxEnd; i++)&#123;
+							if(sortedData.length &lt; (i + 1))&#123;
+								break;
+							&#125;
+							paginatedData[paginatedData.length] = sortedData[i];
+						&#125;
+						jsonReturn += '&#123;"totalObjects":"' + filteredData.length + '","objects":';
+						for(var i = 0; i &lt; paginatedData.length; i++)&#123;
+							jsonReturn += dataToJsonTable(paginatedData[i],dataQuery.typeObject);
+						&#125;
+						jsonReturn += '&#125;';
+					&#125;
+					
+					result = jsonReturn;
+				&#125; else if(dataQuery.operation == 'read')&#123;
+					var jsonReturn = '';
+					var dataArray = getData(dataQuery.id,dataQuery.typeObject);
+					if(null!=dataArray && dataArray.length &gt; 0 && null!=dataArray[0])&#123;
+						jsonReturn += dataQuery.jsonCode + dataToJsonForm(dataArray[0],dataQuery.typeObject);
+					&#125;else&#123;
+						jsonReturn += dataQuery.errorCode + ' Error on read: object whit id =&gt; ' + dataQuery.id + ' dont exists.';
+					&#125;
+					result = jsonReturn;
+				&#125; else if(dataQuery.operation == 'delete')&#123;
+					if(dropData(dataQuery.id,dataQuery.typeObject))&#123;
+						result = 'Sucess on delete!';
+					&#125;else&#123;
+						result = dataQuery.errorCode + 'Error on delete: object whit id =&gt; ' + dataQuery.id + ' dont exists.';
+					&#125;
+				&#125;
+			&#125;
+		&#125;
+		return result;
+	&#125;;
+	
+	var sortIdx = -1;
+	function sortData(dataArray, typeObject, attribute, asc)&#123;
+		if(typeObject == 'Rockstar')&#123;
+			var attrsPos = ['','','name','','style','age','','','','','','','','owner'];
+			sortIdx = -1;
+			for(var i = 0; i &lt; attrsPos.length; i++)&#123;
+				if(attrsPos[i] == attribute)&#123;
+					sortIdx = i;
+					break;
+				&#125;
+			&#125;
+			if(sortIdx &gt;= 0)&#123;
+				dataArray = dataArray.sort(sortArrayColumn);
+				if(!asc)&#123;
+					dataArray = dataArray.reverse();
+				&#125;
+			&#125;
+		&#125;
+		return dataArray;
+	&#125;
+	function sortArrayColumn(a, b) &#123;
+	    if (a[sortIdx] === b[sortIdx]) &#123;
+	        return 0;
+	    &#125; else if(a[sortIdx] &lt; b[sortIdx])&#123;
+	    	return -1;
+	    &#125; else &#123;
+	        return  1;
+	    &#125;
+	&#125;
+	
+	
+	
+	/**
+	 *  Emulation of a [Model][DAO]/[Database storage] for simplification
+	 */
+	function generateRandomString()&#123;
+	    var chars = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','x','z','w','y'];
+	    var randString = '';
+	    for(var i = 0; i &lt; 15; i++)&#123;
+	      var rand = Math.random();
+	      var index = parseInt('0' + (rand * 26));
+	      if(index &gt; 25)&#123;
+	        index = 25;
+	      &#125;
+	      randString += chars[index];
+	    &#125;
+	    return (new Date().getTime() + '_' + randString);
+	&#125;;
+	
+	function createDataArray(dataQuery)&#123;
+		var id = (null!=dataQuery.id && dataQuery.id != '') ? dataQuery.id : generateRandomString();
+		if(dataQuery.typeObject == 'Rockstar')&#123;
+			var objectArray = [
+			              id,
+			              dataQuery.typeObject,
+			              dataQuery.name,
+			              dataQuery.birthdate,
+			              dataQuery.style,
+			              dataQuery.age,
+			              dataQuery.rating,
+			              dataQuery.bornengland,
+			              dataQuery.pizza,
+			              dataQuery.orangejuice,
+			              dataQuery.milk,
+			              dataQuery.apple,
+			              dataQuery.biography,
+			              dataQuery.owner
+			             ];
+			return objectArray;
+		&#125;
+		return null;
+	&#125;
+	
+	function passOnFilterData(objectDataArray,typeObject,filterParams)&#123;
+		var passOnFilter = true;
+		if(typeObject == 'Rockstar')&#123;
+			var name = objectDataArray[2];
+			var age = objectDataArray[5];
+			var birthdate = objectDataArray[3];
+			var style = objectDataArray[4];
+			var owner = objectDataArray[13];
+			if(null!=filterParams && filterParams.length &gt; 0)&#123;
+				for(var i = 0; i &lt; filterParams.length; i++)&#123;
+					if(null!=filterParams[i] 
+							&& null!=filterParams[i][0]
+							&& filterParams[i][0] != ''
+							&& null!=filterParams[i][1]
+							&& filterParams[i][1] != ''
+								)&#123;
+						
+						if(filterParams[i][0] == 'name' 
+										&& (
+										(null==filterParams[i][2] && name.indexOf(filterParams[i][1]) == -1)//dinamic [name like '%name%']
+										|| (filterParams[i][2] == false && name.indexOf(filterParams[i][1]) == -1)// fixed [name like '%name%']
+										|| (filterParams[i][2] == true && name != filterParams[i][1])// fixed [name = 'name']
+										)
+						)&#123;
+							passOnFilter = false;
+							break;
+						&#125;
+						
+						if(filterParams[i][0] == 'age' 
+										&& (
+										(null==filterParams[i][2] && age != filterParams[i][1])
+										|| (filterParams[i][2] == false && age.indexOf(filterParams[i][1]) == -1)
+										|| (filterParams[i][2] == true && age != filterParams[i][1])
+										)
+						)&#123;
+							passOnFilter = false;
+							break;
+						&#125;
+						
+						if(filterParams[i][0] == 'birthdate' 
+										&& (
+										(null==filterParams[i][2] && birthdate.indexOf(filterParams[i][1]) == -1)
+										|| (filterParams[i][2] == false && birthdate.indexOf(filterParams[i][1]) == -1)
+										|| (filterParams[i][2] == true && birthdate != filterParams[i][1])
+										)
+										
+						)&#123;
+							passOnFilter = false;
+							break;
+						&#125;
+						
+						if(filterParams[i][0] == 'style' 
+										&& (
+										(null==filterParams[i][2] && style.indexOf(filterParams[i][1]) == -1)
+										|| (filterParams[i][2] == false && style.indexOf(filterParams[i][1]) == -1)
+										|| (filterParams[i][2] == true && style != filterParams[i][1])
+										)
+										
+						)&#123;
+							passOnFilter = false;
+							break;
+						&#125;
+						
+						if(filterParams[i][0] == 'owner' 
+										&& (
+										(null==filterParams[i][2] && owner.indexOf(filterParams[i][1]) == -1)
+										|| (filterParams[i][2] == false && owner.indexOf(filterParams[i][1]) == -1)
+										|| (filterParams[i][2] == true && owner != filterParams[i][1])
+										)
+										
+						)&#123;
+							//console.log('owner =&gt; ' + owner + ' | filter =&gt; [' + filterParams[i][2] + ']');
+							passOnFilter = false;
+							break;
+						&#125;
+						
+					&#125;
+				&#125;
+			&#125;
+		&#125;
+		return passOnFilter;
+	&#125;
+	
+	/**
+	 * Take care whit object data that could break the JSON format.
+	 * Special chars should be correctly handled before the call of methods like [dataToJsonTable] and [dataToJsonForm]
+	 */
+	function dataToJsonForm(objectDataArray,typeObject)&#123;
+		var json = '';
+		if(typeObject == 'Rockstar')&#123;
+			var id = objectDataArray[0];
+			var name = objectDataArray[2];
+			var birthdate = objectDataArray[3];
+			var style = objectDataArray[4];
+			var age = objectDataArray[5];
+			var rating = objectDataArray[6];
+			var bornengland = objectDataArray[7];
+	        var pizza = objectDataArray[8];
+	        var orangejuice = objectDataArray[9];
+	        var milk = objectDataArray[10];
+	        var apple = objectDataArray[11];
+	        var biography = objectDataArray[12];
+	        var preferencesArray = '[' + pizza + ',' + orangejuice + ',' + milk + ',' + apple + ']';
+			json += '&#123;';
+			json += '"id":"' + id + '"';
+			json += ',"name":"' + name  + '"';
+			json += ',"age":"' + age  + '"';
+			json += ',"birthdate":"' + birthdate  + '"';
+			json += ',"style":"' + style + '"';
+			json += ',"rating":"' + rating + '"';
+			json += ',"bornengland":"' + bornengland + '"';
+			json += ',"preferences":"' + preferencesArray + '"';
+			json += ',"biography":"' + biography + '"';
+			json += '&#125;';
+		&#125;
+		return json;
+	&#125;
+	
+	/**
+	 * Take care whit object data that could break the JSON format.
+	 * Special chars should be correctly handled before the call of methods like [dataToJsonTable] and [dataToJsonForm]
+	 */
+	function dataToJsonTable(objectDataArray,typeObject)&#123;
+		var json = '';
+		if(typeObject == 'Rockstar')&#123;
+			var id = objectDataArray[0];
+			var name = objectDataArray[2];
+			var age = objectDataArray[5];
+			var birthdate = objectDataArray[3];
+			var style = objectDataArray[4];
+			var owner = objectDataArray[13];
+			var biography = objectDataArray[12];
+			json += '&#123;';
+			json += '"id":"' + id + '"';
+			json += ',"name":"' + name  + '"';
+			json += ',"age":"' + age  + '"';
+			json += ',"birthdate":"' + birthdate  + '"';
+			json += ',"style":"' + style + '"';
+			json += ',"owner":"' + owner + '"';
+			json += ',"biography":"' + biography + '"';
+			json += '&#125;';
+		&#125;
+		return json;
+	&#125;
+	
+	
+	
+	var dataStorage = new Array();
+	function createInitialData()&#123;
+		var rocker1 = ['1','Rockstar','John Winston Lennon','09/10/1940','classicrock','40','100.00',
+				       'true','true','false','true','false',
+				       'became involved in the skiffle craze as a teenager; his first band, the Quarrymen, first became the Silver Beatles, 
+				       and finally, evolved into the Beatles in 1960.',
+				       'SYSTEM'];
+		var rocker2 = ['2','Rockstar','James Paul McCartney','18/06/1942','classicrock','75','100.01',
+				       'true','true','true','false','false',
+				       'McCartney has been recognised as one of the most successful composers and performers of all time',
+				       'SYSTEM'];
+		var rocker3 = ['3','Rockstar','Lewis Brian Hopkin Jones','28/02/1942','hardrock','27','85.23',
+				       'true','false','false','true','false',
+				       'Jones\'s fellow band members Mick Jagger and Keith Richards took over the band\'s musical direction, 
+				       especially after they became a successful songwriting team',
+				       'SYSTEM'];
+		var rocker4 = ['4','Rockstar','Michael Philip (Mick) Jagger','26/06/1946','hardrock','69','130.33',
+				       'true','true','true','true','true',
+				       'Jagger\'s career has spanned over 55 years, and he has been described as 
+				       "one of the most popular and influential frontmen in the history of rock & roll"',
+				       'SYSTEM'];
+		var rocker5 = ['5','Rockstar','Ian Fraiser (Lemmy) Kilmister','24/12/1945','heavymetal','60','220.66',
+				       'true','false','false','false','true',
+				       'better known as Lemmy, was an English musician, singer, and songwriter who founded and fronted the rock band Motörhead.',
+				       'SYSTEM'];
+		var rocker6 = ['6','Rockstar','James Marshall (Jimi) Hendrix','27/11/1942','poprock','27','110.32',
+				       'false','false','true','false','false',
+				       'Born in Seattle, Washington, Hendrix began playing guitar at the age of 15. In 1961, he enlisted in the U.S. Army',
+				       'SYSTEM'];
+		var rocker7 = ['7','Rockstar','Willian Axl Rose','06/02/1962','hardrock','55','300.99',
+				       'false','true','true','true','false',
+				       'Willian Axl Rose is an American singer, songwriter, record producer and musician. 
+				       He is the lead vocalist of the hard rock band Guns N\' Roses',
+				       'SYSTEM'];
+		var rocker8 = ['8','Rockstar','Eric Patrick Clapton','30/03/1945','hardrock','72','290.88',
+				       'true','true','true','true','false',
+				       'Clapton has been referred to as one of the most important and influential guitarists of all time.',
+				       'SYSTEM'];
+		
+		storeData(rocker1);
+		storeData(rocker2);
+		storeData(rocker3);
+		storeData(rocker4);
+		storeData(rocker5);
+		storeData(rocker6);
+		storeData(rocker7);
+		storeData(rocker8);
+		
+	&#125;
+	createInitialData();
+	
+	
+	function storeData(dataObject)&#123;
+		return addToStorage(dataObject,dataStorage);
+	&#125;
+	function getData(id,typeObject)&#123;
+		return getFromStorage(id,typeObject,dataStorage);
+	&#125;
+	function dropData(id,typeObject)&#123;
+		return dropFromStorage(id,typeObject,dataStorage);
+	&#125;
+	function getFromStorage(id,typeObject,array)&#123;
+		var results = [];
+		var size = array.length;
+		for(var i = 0; i &lt; size; i++)&#123;
+			if(null==array[i])&#123;
+				continue;
+			&#125;
+			if(null!=array[i][1] && array[i][1] == typeObject)&#123;
+				if(null!=id && (null==array[i][0] || array[i][0] != id))&#123;
+					continue;
+				&#125;
+				if(null!=array[i][2])&#123;
+					results[results.length] = array[i][2];// load all objects of a typeObject, and whit a id (if specified)
+				&#125;
+			&#125;
+		&#125;
+		return results;
+	&#125;;
+	function dropFromStorage(id,typeObject,array)&#123;
+		if(null==id)&#123;
+			return false;
+		&#125;
+		var size = array.length;
+		for(var i = 0; i &lt; size; i++)&#123;
+			if(null==array[i])&#123;
+				continue;
+			&#125;
+			if(null!=array[i][1] && array[i][1] == typeObject)&#123;
+				if(null==array[i][0] || array[i][0] != id)&#123;
+					continue;
+				&#125;
+				array[i][2] = null;// delete
+				return true;
+			&#125;
+		&#125;
+		return false;
+	&#125;;
+	function addToStorage(object,array)&#123;
+		var pos = -1;
+		var size = array.length;
+		for(var i = 0; i &lt; size; i++)&#123;
+			if(null==array[i])&#123;
+				continue;
+			&#125;
+			if(array[i][0] == object[0])&#123;
+				pos = i;
+				break;
+			&#125;
+		&#125;
+		if(pos &gt;= 0)&#123; // update
+			array[pos][1] = object[1];
+			array[pos][2] = object;
+			return 'Updated';
+		&#125;else&#123; // create new
+			array[size] = [object[0], object[1], object];
+			return 'Created';
+		&#125;
+	&#125;;
+	</code>
+	</pre>
+		</div>
+	</div>
+</div>

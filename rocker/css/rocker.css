@@ -1,0 +1,310 @@
+.rockerMsg{
+	position: fixed !important;
+	top: 20px !important;
+	z-index: 100000000 !important;
+	padding: 10px !important;
+}
+.rockerMsg span{
+	float: left !important; 
+	margin: 1px 5px 0px 0px !important;
+}
+
+.rockerContainer{
+	margin: 5px 0px 15px 0px !important;
+}
+.rockerFormContainer{
+	margin-left: 5px !important;
+	padding: 1px !important;
+}
+.rockerFormButtonsContainer, .rockerFormUploadButtonsContainer{
+	margin: 5px 5px 5px 5px !important;
+	padding: 5px 5px 5px 5px !important;
+}
+.rockerFormUploadButtonsContainer{
+ 	margin: 5px 0px 5px 0px !important;
+ 	text-align: center !important;
+}
+.rockerFieldContainer{
+	padding: 5px 5px 5px 5px !important;
+}
+.rockerSplash{
+	opacity: 0.38 !important;
+	position: absolute !important;
+	z-index: 100000000000 !important;
+}
+.rockerSplashIntern{
+	background: url('./loading3.gif') 50% 50% no-repeat !important;
+}
+.rockerUploaderChoiceFileContainer{
+	padding: 20px !important;
+	border-radius: 3px !important;
+}
+.rockerLabel{
+	font-weight: 500 !important;
+	letter-spacing: 1px !important;
+	float: left !important;
+	margin-right: 3px !important;
+}
+.rockerInput,
+.rockerInputError, 
+.rockerInputDisabled,
+.rockerFieldset{
+	letter-spacing: 1px !important;
+	border: 1px solid #ccc !important;
+	background-color: #ffffef !important;
+}
+.rockerInputDisabled,
+.rockerFieldsetDisabled{
+	background-color: #ddb !important;
+}
+.rockerInputError,
+.rockerFieldsetError{
+	border: 1px solid #F00 !important;
+}
+.rockerFieldset,
+.rockerFieldsetDisabled,
+.rockerFieldsetError{
+	padding-left: 5px !important;
+}
+.rockerErrorContainer{
+	padding: 5px 0px 5px 0px !important;
+}
+.rockerError{
+	margin: 1px 0px 2px 0px !important;
+}
+.rockerInput select,
+.rockerInputError select, 
+.rockerInputDisabled select
+{
+	 margin: 1px 1px 2px 1px !important;
+	 border: 0px !important;
+}
+.rockerDragHeader{
+	cursor: move !important;
+}
+.rockerHeaderForm{
+	text-align: left !important;
+	padding: 2px 5px 5px 15px !important;
+}
+.rockerCloseForm{
+ 	float: right !important; 
+	padding: 0px 0px 2px 1px !important;
+}
+.rockerCloseForm span{
+    display: block !important;
+ 	font-weight: 600 !important;
+ 	width: 16px !important;
+	height: 16px !important;
+}
+.rockerMaskEx{
+	padding: 3px 5px 3px 5px !important;
+	font-family: Verdana !important;
+	font-weight: 300 !important;
+	font-size: 9px !important;
+	opacity: 1 !important;
+	cursor: pointer !important;
+}
+.rockerMaskExSeparator{
+	margin: 0px 1px 0px 1px !important;
+	font-size: 12px !important;
+}
+.rockerCompletationRichContainer{
+	margin-top: -30px !important;
+	padding: 0px !important;
+	position: absolute !important;
+	z-index: 100000 !important;
+}
+.rockerCompletationContainer{
+	margin-top: -5px !important;
+	padding: 0px !important;
+}
+.rockerCompletationContainerIntern{
+	height: 30px !important;
+}
+.rockerCompletationMessage{
+	height: 10px !important;
+	font-family: Verdana !important;
+	font-weight: 200 !important;
+	font-size: 9px !important;
+	letter-spacing: 1px !important;
+	padding-left: 20px !important;
+}
+.rockerCompletationError{
+	background-color: #f00 !important;
+}
+.rockerCompletationOk{
+	background-color: #0f0 !important;
+}
+.rockerMaskDiv{
+	position: absolute !important;
+	opacity: 0.8 !important;
+	z-index: 1000 !important;
+	margin: 0px !important;
+	overflow: hidden !important;
+	display: none !important;
+}
+
+.rockerTableContainer{
+	margin: 10px 2px 20px 2px !important;
+}
+.rockerTableHeader{
+}
+.rockerTableHeaderTitle{
+	text-align: center !important;
+}
+.rockerTableColumnHeader{
+	display: inline !important;
+	float: left !important;
+	text-align: center !important;
+	padding: 0px !important;
+	border: 0px !important;
+	background: transparent !important;
+	
+}
+.rockerFilterTableColumn{
+	text-align: center !important;
+	height: 25px !important;
+}
+.rockerTitleTableColumn{
+	height: 20px !important;
+}
+
+.rockerTableBodyContent{
+	height: 190px !important;
+	overflow-x: hidden !important;
+	overflow-y: auto !important;
+}
+
+.rockerTableSubHeader, .rockerTableSubFooter,
+.rockerRowTable0, .rockerRowTable1{
+	border-left: 0px !important;
+	border-right: 0px !important;
+}
+.rockerRowTable0,
+.rockerRowTable1{
+	border-top: 0px !important;
+}
+.rockerTableColumn, .rockerTableColumnActions{
+	font-size: 12px !important;
+	font-family: verdana !important;
+}
+.rockerTableColumn{
+	word-wrap: break-word !important;
+	padding: 3px 0px 5px 0px !important;
+	border-right: 1px dotted #ccc;
+}
+.rockerTableColumn p{
+	line-height: 1.3em !important;
+	padding: 0px !important;
+	margin: 0px !important;
+}
+.rockerTableFooter{
+	padding: 4px 4px 4px 4px !important;
+}
+.rockerTableFooter .rockerInput{
+	float: right !important;
+}
+.rockerTableFooter .ui-icon{
+	margin: 0px 2px 0px 2px !important;
+}
+
+/**
+	buttons
+*/
+.rockerPrintTableButton{
+	float: right !important;
+	margin-right: 2px !important;
+}
+.rockerSortTableButtonAsc,
+.rockerSortTableButtonDesc,
+.rockerPrintTableButton,
+.rockerTableButton{
+	width: 16px !important;
+	height: 16px !important;
+	opacity: 0.85 !important;
+	margin-top: 1px !important;
+}
+.rockerTableButton{
+	margin: 0px 2px -5px 2px !important;
+	width: 18px !important;
+	height: 18px !important;
+}
+.rockerSortTableButtonAsc{
+	float: left !important;
+	margin-left: 2px !important;
+}
+.rockerSortTableButtonDesc{
+	float: right !important;
+	margin-right: 2px !important;
+}
+.rockerScrollerTableButton,
+.rockerScrollerTableButtonDisabled,
+.rockerScrollerTableButtonSelected
+{
+	float: left !important;
+	min-width: 20px !important;
+	height: 20px !important;
+	text-align: center !important;
+	opacity: 0.85 !important;
+	font-size: 12px !important;
+	font-family: verdana !important;
+	padding: 0px 5px 0px 5px !important;
+}
+
+.rockerSortTableButtonAsc:hover,
+.rockerSortTableButtonDesc:hover,
+.rockerPrintTableButton:hover,
+.rockerTableButton:hover,
+.rockerScrollerTableButton:hover,
+.rockerCloseForm:hover
+{
+	opacity: 1 !important;
+	background-color: #ff2 !important;
+	border-color: #f90 !important;
+	cursor: pointer !important;
+}
+.rockerScrollerTableButton{
+	
+}
+.rockerScrollerTableButtonDisabled{
+	opacity: 0.55 !important;
+}
+.rockerScrollerTableButtonSelected{
+	background-color: #efff33 !important;
+	border-color: #fc0 !important;
+	opacity: 0.92 !important;
+}
+
+.rockerPrintDiv{
+	display: none !important;
+}
+@media print{
+	.rockerPrintDiv{
+		display: block !important;
+		width: 100% important;
+		height: 100% !important;
+		position: absolute !important;
+		z-index: 100000000 !important;
+		background-color: #fff !important;
+	}
+	.rockerTableHeaderColumnActions,
+	.rockerTableColumnActions,
+	.rockerTableFooter,
+	.rockerSortTableButtonAsc,
+	.rockerSortTableButtonDesc,
+	.rockerPrintTableButton,
+	.rockerTableButton,
+	.rockerInput,
+	.rockerInputDisabled,
+	.rockerTableHeaderColumns .rockerFilterTableColumn{
+		display: none !important;
+	}
+	.rockerTableBodyContent{
+		height: auto !important;
+		overflow-x: hidden !important;
+		overflow-y: hidden !important;
+	}
+}
+
+
+

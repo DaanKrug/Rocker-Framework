@@ -1,0 +1,293 @@
+<div class="ui-corner-all" style="margin: 5px 0px 0px 20px; width: 750px;">
+	<div class="ui-widget-header ui-corner-top" style="padding: 5px 20px 5px 20px;">
+	   Pay attention for these following explanations and see get the files in the "Downloads" section
+	   to understand the Rocker Framework.
+	</div>
+	<div id="accordion" class="ui-accordion ui-widget ui-helper-reset" role="tablist">
+		<h3 id="tabHeader_co1a" onclick="showConceptTab('co1a');">
+			<span id="tabHeaderIcon_co1a"></span>
+			JSON data format - Loading a single object to put in a RockerForm
+		</h3>
+		<div id="tabContent_co1a">
+			<p>
+				JSON format for read a object to a RockerForm (operation 'read'):<br/>
+				<strong>&#123;"keyId(1)":"keyValue(1)", ..., "keyId(n)":"keyValue(n)"&#125;</strong><br/><br/>
+				Where <strong>&#123; &#125;</strong> delimits the object scope, and 
+				the <strong>"" : ""</strong> pairs delimit the object name/value attributes.<br/><br/>
+				Example a object 'Person':<br/>
+					- id = 10;<br/>
+					- name = 'John';<br/>
+					- age = 40;<br/><br/>
+					
+				turn into:<br/>
+					&#123;"id":"10","name":"John","age":"40"&#125;
+			</p>
+		</div>
+		
+		<h3 id="tabHeader_co1b" onclick="showConceptTab('co1b');">
+			<span id="tabHeaderIcon_co1b"></span>
+			JSON data format - Loading a list objects to put into a RockerTable
+		</h3>
+		<div id="tabContent_co1b">
+			<p>
+				JSON format for load a object list to a RockerTable (operation '<code>filterAndLoad</code>'):<br/>
+				<strong>&#123;"totalObjects": totalObjectsNumber, "objects": &#123;1&#125;&#123;2&#125;&#123;3&#125;...&#123;n&#125;&#125;</strong><br/><br/>
+	 			where:<br/>
+	 				<strong>totalObjects</strong> is a C.O.C key identifier that represents a count of objects in a database (as 'select count(*) from ' SQL ),<br/>
+	      			<strong>totalObjectsNumber</strong> is a number of objects into a respective table on database,<br/>
+	       			<strong>objects</strong> is a C.O.C key identifier that represent the paginated list objects returned on request,
+	       			and <strong>&#123;1&#125;&#123;2&#125;&#123;3&#125;...&#123;n&#125;</strong> is a list of json objects 
+	       			following a <strong>Loading a single object to put in a RockerForm</strong> sintax<br/>
+			</p>
+		</div>
+		
+		<h3 id="tabHeader_co2" onclick="showConceptTab('co2');">
+			<span id="tabHeaderIcon_co2"></span>
+			C.O.C (Convention over Configuration) terms - <code>totalObjects</code>
+		</h3>
+		<div id="tabContent_co2">
+			<strong>totalObjects</strong>:<br/>
+			 key to identify the total objects on database, for the respective request on '<code>filterAndLoad</code>' operation.
+		</div>
+		
+		<h3 id="tabHeader_co3" onclick="showConceptTab('co3');">
+			<span id="tabHeaderIcon_co3" ></span>
+			C.O.C (Convention over Configuration) terms - <code>objects</code>
+		</h3>
+		<div id="tabContent_co3" >
+			<strong>objects</strong>:<br/>
+			key to identify the object list returned for a request on '<code>filterAndLoad</code>' operation.<br/><br/>
+	  		'<code>totalObjects</code>' and '<code>objects</code>' could be explored in file node.js.appserver.js <br/><br/>
+			<code>
+			  ...<br/>
+			    jsonReturn += '&#123;"totalObjects":"' + filteredData.length + '","objects":';<br/>
+				for(var i = 0; i < paginatedData.length; i++)&#123;<br/>
+					jsonReturn += dataToJsonTable(paginatedData[i],dataQuery.typeObject);<br/>
+				&#125;<br/>
+			    jsonReturn += '&#125;';<br/>
+			  ...<br/><br/>
+			  
+			  ... // dataToJsonForm(objectDataArray,typeObject)<br/>
+			    json += '&#123;';<br/>
+				json += '"id":"' + id + '"';<br/>
+				json += ',"name":"' + name  + '"';<br/>
+				json += ',"age":"' + age  + '"';<br/>
+				json += ',"birthdate":"' + birthdate  + '"';<br/>
+				json += ',"style":"' + style + '"';<br/>
+				json += ',"rating":"' + rating + '"';<br/>
+				json += ',"bornengland":"' + bornengland + '"';<br/>
+				json += ',"preferences":"' + preferencesArray + '"';<br/>
+				json += ',"biography":"' + biography + '"';<br/>
+				json += '&#125;';<br/>
+			  ...
+			</code>
+		</div>
+		
+		<h3 id="tabHeader_co4" onclick="showConceptTab('co4');">
+			<span id="tabHeaderIcon_co4" ></span>
+			C.O.C (Convention over Configuration) terms - <code>operation</code>
+		</h3>
+		<div id="tabContent_co4" >
+			<strong>operation</strong>:<br/>
+			 describes a operation name on request. Used in RockerForm and RockerTable.<br/>
+			- RockerForm use could be explored in file rockstars.js <br/>
+			<code>arrayFields[i] = new Hidden('operation','store');</code><br/>
+			- RockerTable has a internal mechanism to use it, whit '<code>filterAndLoad</code>', 
+			'<code>read</code>' and '<code>delete</code>' operations for contained objects.
+		</div>
+		
+		<h3 id="tabHeader_co5" onclick="showConceptTab('co5');">
+			<span id="tabHeaderIcon_co5" ></span>
+			C.O.C (Convention over Configuration) terms - <code>id</code>
+		</h3>
+		<div id="tabContent_co5" >
+			<strong>id</strong>:<br/> describes a Object Id. Used in RockerForm and RockerTable.<br/>
+			- RockerForm use could be explored in file rockstars.js <br/><code>arrayFields[i] = new Hidden('id','');</code><br/>
+			- RockerTable has a internal mechanism to use it, 
+			whit '<code>read</code>' and '<code>delete</code>' operations for contained objects.
+		</div>
+		
+		
+		<h3 id="tabHeader_co6" onclick="showConceptTab('co6');">
+			<span id="tabHeaderIcon_co6" ></span>
+			C.O.C (Convention over Configuration) terms - <code>additionalParamsAndValuesOnRequestTable</code>
+		</h3>
+		<div id="tabContent_co6" >
+			<strong>additionalParamsAndValuesOnRequestTable</strong>:<br/>
+			 Attribute of RockerTable, that allow change the filtering and loading data mechanism.<br/>
+			- Need be used whit <code>&operation=filterAndLoad</code>.
+		</div>
+		
+		
+		<h3 id="tabHeader_co7" onclick="showConceptTab('co7');">
+			<span id="tabHeaderIcon_co7" ></span>
+			C.O.C (Convention over Configuration) terms - <code>filterAndLoad</code>
+		</h3>
+		<div id="tabContent_co7" >
+			<strong>filterAndLoad</strong>:<br/>
+			its a '<code>operation</code>' used to load data by a RockerTable 
+			(url request to load data always contains '<code>&operation=filterAndLoad</code>').<br/>
+			- Used internally by a RockerTable to default filter and load data operations.<br/>
+			&nbsp;&nbsp;&nbsp; - Use the following conventioned terms internally:<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <code>numberFilterParams</code>: parameter that determine the number of 
+			columns that are used to filter process.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <code>attr0, attr1 ... attrN</code>: parameters that determine the name
+			of attributes used to filter in columns in (0,1 ... N). <br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - <code>valueAttr0, valueAttr1 ... valueAttrN</code>: parameters that determine
+			the values respectives for each of attributes names of <code>attr0, attr1 ... attrN</code>. 
+			<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parameter <strong>valueAttr0</strong> contains the value associated the 
+			<strong>attr0</strong> parameter and follow like this until the last parameter(valueAttrN).<br/><br/>
+			This filtering should be prepared in back-end server, as could be explored in file node.js.appserver.js :<br/>
+			<code>
+				...<br/>
+				var numberFilterParams = dataQuery.numberFilterParams;<br/>
+				var filterParams = new Array();<br/>
+				for(var i = 0; i < numberFilterParams; i++)&#123;// dinamic filter according input fields on table header<br/>
+					filterParams[filterParams.length] = [dataQuery[ 'attr' + i],dataQuery[ 'valueAttr' + i],null];<br/>
+				&#125;<br/>
+				...
+			</code>
+			<br/><br/>
+			- To personalize the way of load and filter data, for one specific situation or for change it for all cases for a 
+			  RockerTable, should be used to set it, the '<code>additionalParamsAndValuesOnRequestTable</code>' RockerTable attribute.
+			  It could be explored in file rockstars.js<br/>
+			  <code>
+			  	...<br/>
+			  	this.additionalParamsAndValuesOnRequestTable = '';<br/>
+	  			this.additionalParamsAndValuesOnRequestTable += '&operation=filterAndLoad';<br/>
+	  			...
+			  </code>
+		</div>
+		
+		
+		<h3 id="tabHeader_co8" onclick="showConceptTab('co8');">
+			<span id="tabHeaderIcon_co8" ></span>
+			C.O.C (Convention over Configuration) terms - <code>read</code>
+		</h3>
+		<div id="tabContent_co8" >
+			<strong>read</strong>:<br/> its a '<code>operation</code>' used by edit button on RockerTable. <br/>
+			The RockerTable send ajax request to a server get a object whit a '<code>id</code>' and 
+			put the result into your owner RockerForm.<br/>
+			It could be explored in file node.js.appserver.js 
+			<code>
+			  ...<br/>
+			  if(pathname.indexOf('/rockstars') == 0)&#123;<br/>
+				if(null!=dataQuery.operation)&#123;<br/>
+					...<br/>
+					&#125; else if(dataQuery.operation == 'read')&#123;<br/>
+						var dataArray = getData(dataQuery.id,dataQuery.typeObject);<br/>
+					...<br/>
+			  ...<br/>
+			</code>
+		</div>
+		
+		<h3 id="tabHeader_co9" onclick="showConceptTab('co9');">
+			<span id="tabHeaderIcon_co9" ></span>
+			C.O.C (Convention over Configuration) terms - <code>delete</code>
+		</h3>
+		<div id="tabContent_co9" >
+			<strong>delete</strong>:<br/> its a '<code>operation</code>' used by delete button on RockerTable. <br/>
+		    The RockerTable send a ajax request to server
+			delete a object whit a '<code>id</code>' and after delete the object, RockerTable makes a new request to reload the data.<br/>
+			It could be explored in file node.js.appserver.js <br/>
+			<code>
+			  ...<br/>
+			  &#125; else if(dataQuery.operation == 'delete')&#123;<br/>
+					if(dropData(dataQuery.id,dataQuery.typeObject))&#123;<br/>
+						result = 'Sucess on delete!';<br/>
+			  ...<br/>
+			</code>
+		</div>
+		
+		
+		<h3 id="tabHeader_co10" onclick="showConceptTab('co10');">
+			<span id="tabHeaderIcon_co10" ></span>
+			C.O.C (Convention over Configuration) terms - <code>typeObject</code>
+		</h3>
+		<div id="tabContent_co10" >
+			<strong>typeObject</strong>:<br/> a type or class of a object into a RockerForm/RockerTable.<br/>
+		    Identifies distinct type of objects, and use it for make requests to server.<br/>
+			It could be explored in file node.js.appserver.js <br/>
+			<code>
+			  ...<br/>
+			  form.on('field', function(name, value) &#123;<br/>
+					if(name == 'operation')&#123;<br/>
+						operation = value;<br/>
+					&#125;else if(name=='typeObject')&#123;<br/>
+						typeObject = value;<br/>
+					&#125;else if(name=='formid')&#123;<br/>
+						formid = value;<br/>
+					&#125;<br/>
+			  &#125;);<br/>
+			  ...<br/>
+			</code>
+		</div>
+		
+		<h3 id="tabHeader_co11" onclick="showConceptTab('co11');">
+			<span id="tabHeaderIcon_co11" ></span>
+			C.O.C (Convention over Configuration) terms - <code>formid</code>
+		</h3>
+		<div id="tabContent_co11" >
+			<strong>formid</strong>:<br/> used in UpperFile and UpperFileS3 components. Indicates a id of the upload form.<br/>
+		    The component make a request that upload the file in server whit a '<code>formid</code>'. If the request
+		    result successfully, then make other ajax request to obtain the file url in server directory and put in 
+		    a input data to store the file name, and update the file panel whit this url, to show the
+		    file.<br/>
+			It could be explored in file node.js.appserver.js <br/>
+			<code>
+			  ... // 1º request<br/>
+			  if(req.method=='POST') &#123;<br/>
+					if(pathname.indexOf('/upload') > 0)&#123;<br/>
+						handleUpload(req,res,pathname);<br/>
+			  ...<br/><br/>
+			  
+			  ... // 2º request<br/>
+			  if(dataQuery.operation == 'uploadResult')&#123;<br/>
+					//console.log(dataQuery);<br/>
+					var dataArrayUpload = getData(dataQuery.formid,dataQuery.typeObject);<br/>
+					if(null!=dataArrayUpload && null!=dataArrayUpload[0])&#123;<br/>
+						result = dataArrayUpload[0][2];<br/>
+						result = replaceAll(result,'\\','/');<br/>
+						dropData(dataQuery.formid,dataQuery.typeObject);//remove from data array<br/>
+					&#125;else&#123;<br/>
+						result = '';<br/>
+					&#125;
+					return result;// the upload component wait for a string containing the relativePath 
+					of a uploaded file relative to the server root.<br/>
+		      &#125;<br/>
+			  ...<br/>
+			</code>
+		</div>
+		
+		<h3 id="tabHeader_co12" onclick="showConceptTab('co12');">
+			<span id="tabHeaderIcon_co12" ></span>
+			C.O.C (Convention over Configuration) terms - <code>file</code>
+		</h3>
+		<div id="tabContent_co12" >
+			<strong>file</strong>:<br/> used in UpperFile and UpperFileS3 components. 
+			Indicates a input file id and input file name of uploaded/to upload image.<br/>
+			It could be explored in file node.js.appserver.js <br/>
+			<code>
+			  ...<br/>
+			  var filenames = new Array();<br/>
+			  form.on('file', function(name, file) &#123;<br/>
+					filenames[filenames.length] = name;<br/>
+			  &#125;);<br/>
+			  ...<br/><br/>
+			  ...<br/>
+			  storeUploadResult(formid,typeObject,files[filenames[i]].path);<br/>
+			  ...<br/>
+			</code>
+		</div>
+		
+		<!-- 
+		<h3 id="tabHeader_co13" onclick="showConceptTab('co13');">
+			<span id="tabHeaderIcon_co13" ></span>
+			C.O.C (Convention over Configuration) terms - 
+		</h3>
+		<div id="tabContent_co13" >CO5 DESC</div>
+		-->
+		
+	</div>
+</div>

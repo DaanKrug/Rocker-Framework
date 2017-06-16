@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rocker Framework Functional Show Case</title>
+	<link rel="icon" type="image/x-icon" href="../static/icon.ico" />
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/styles.css">
+    
+    <!-- Polyfill(s) for older browsers -->
+    <script src="../node_modules/core-js/client/shim.min.js"></script>
+
+    <script src="../node_modules/zone.js/dist/zone.js"></script>
+    <script src="../node_modules/systemjs/dist/system.src.js"></script>
+    
+    <script src="../static/systemjs.config.js"></script>
+    <script>
+    	System.import('../static/js/componentsData.js').catch(function(err){ console.error(err); });
+    	System.import('../static/ng/about/aboutFunctions.js').catch(function(err){ console.error(err); });
+    	System.import('../static/ng/menuTop/menuTopFunctions.js').catch(function(err){ console.error(err); });
+    	System.import('../static/ng/menuLeft/menuLeftFunctions.js').catch(function(err){ console.error(err); });
+   		System.import('../static/ng/concepts/conceptsFunctions.js').catch(function(err){ console.error(err); });
+     	System.import('../static/main.js').catch(function(err){ console.error(err); });
+    </script> 
+    
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.0.0-rc.20.min.js"></script>
+    <script src="../static/lib/rocker/rocker.js"></script>
+    <script>
+    	initRocker('../static/lib/');
+    </script>
+  	<script src="../static/js/rockstars.js"></script>
+  	
+  </head>
+
+  <body>
+  	<div>
+  		<menuTop></menuTop>
+  	</div>
+  	<div>
+  		<div id="divMenuLeft" style="width: 200px; float: left;">
+  			<menuLeft></menuLeft>
+  		</div>
+  		<div style="float: left;">
+  			<div id="appenderBase"></div>
+  			<div id="root" style="float: left;"></div>
+	  		<div id="divComponents">
+	  			<components></components>
+	  		</div>
+	  		<div id="divConcepts">
+	  			<concepts></concepts>
+	  		</div>
+	  		<div id="divSourceCode">
+	  			<sourcecode></sourcecode>
+	  		</div>
+	  		<div id="divAbout">
+	  			<about></about>
+	  		</div>
+			<div id="divDownloads">
+	  			<downloads></downloads>
+	  		</div>
+  		</div>
+  		<div style="clear: both;"></div>
+  	</div>
+  </body>
+</html>
