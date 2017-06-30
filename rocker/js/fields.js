@@ -714,7 +714,8 @@ CheckGroup.prototype.generateDrawContent = function(){
 			inner +=  ((!this.horizontalAlignFields &&  i > 0) ? '<br/>' : (i > 0 ? '&nbsp;&nbsp;' : ''));
 			var labelV = this.arrayCheckLabels[i];
 			var nameC = this.arrayCheckNames[i];
-			var isChecked = ( (null!=this.arrayCheckCheckeds[i] && (this.arrayCheckCheckeds[i] == 'true' || this.arrayCheckCheckeds[i] == true) ) ? true : false);
+			var isChecked = ( (null!=this.arrayCheckCheckeds[i] && (this.arrayCheckCheckeds[i] == 'true' || this.arrayCheckCheckeds[i] == true) ) 
+								? true : false);
 			inner +=  '<input id="'+ this.name + '_' + i +'" type="checkbox" name="'+ nameC + '"';
 			inner += ' value="'+ labelV + '" ';
 			if(isChecked){
@@ -920,6 +921,7 @@ var UpperFile = function (id,label,value,width,height,appenderId,actionBaseForm,
 	this.bootstrapNewLine = ((null!=bootstrapNewLine && (bootstrapNewLine == true || bootstrapNewLine == 'true')) ? true : false);
 	this.onclick = this.onbeforeOpen + ' singletonRockerStorage.generateInnerFormUpLoad(\'' + this.id + '\');';
 	this.uploadSended = false;
+	this.filePath = null;
 	singletonRockerStorage.storeJsInputText(this.id,this);
 };
 UpperFile.prototype = new BaseElement();
@@ -927,32 +929,46 @@ UpperFile.prototype.constructor = UpperFile;
 UpperFile.prototype.generateDrawContent = function(){
 	var inner = '';
 	inner += this.getOpenBootstrapCol();
-	inner += '<div class="rockerContainer ui-widget-content ui-corner-all" style="width: '+ (this.width) +'px; height: ' + (this.height) + 'px; float: left;">';
+	inner += '<div class="rockerContainer ui-widget-content ui-corner-all" style="width: ';
+	inner += (this.width) +'px; height: ' + (this.height) + 'px; float: left;">';
 	inner += '<div style="clear: both;"></div>';
-	inner += '<div class="rockerLabel ui-widget-header ui-corner-top" style="padding: 3px; width: 100%; margin-top: -1px;">&nbsp;' + this.label + '</div>';
+	inner += '<div class="rockerLabel ui-widget-header ui-corner-top" style="padding: 3px; width: 100%; margin-top: -1px;">&nbsp;';
+	inner += this.label + '</div>';
 	inner += '';
-	inner += '<div id="imagePanel_'+ this.id +'" style="width: 100%; height: ' + (this.height - 37);
+	inner += '<div id="imagePanel_'+ this.id +'" style="width: 100%; height: ' + (this.height - 29);
 	inner += 'px; margin: 0px;" class="rockerInputDisable" >';
 	inner += '';
 	inner += '</div>';
 	inner += '<div  class="ui-widget ui-widget-header ui-corner-bottom" >';
 	inner += '<input type="hidden" id="checker_'+ this.id +'" name="checker_'+ this.id +'" value="" />';
 	inner += '<input id="'+ this.id + '" name="'+ this.id + '" ';
-	inner += ' type="text" style="width: '+ (((this.width/3) - 10) * 2) +'px; margin:  4px  4px  6px  4px;" ';
-	if(this.hideInputField){
-		inner += ' class="rockerInput ui-corner-all" ';
-	}else{
-		inner += ' class="rockerInputDisabled ui-corner-all" onkeydown="return false;" ';
-	}
+	inner += ' type="text" style="display: none;" ';
+	inner += ' class="rockerInput ui-corner-all" ';
 	inner += ' value="' + this.value +'" />';
 	//
-	inner += '<input style="font-size: 11px; font-family: verdana; margin-top: -4px;" ';
 	var uploadUploadForm = singletonRockerI18n.getMessage('UpperFile.uploadUploadForm',null);
+	inner += '<input style="font-size: 10px; font-family: verdana; margin: 3px 4px 3px 0px; float: right;" ';
 	inner += ' class="ui-button ui-corner-all" type="button" value="' + uploadUploadForm + '" onclick="'+ this.onclick +'" />';
+	//
+	var deleteAction = 'singletonRockerStorage.removeUploadedFile(\'' + this.id + '\');';
+	inner += '<div class="rockerTableButton ui-widget-content ui-corner-all ui-icon ui-icon-trash" ';
+	inner += ' onclick="' + deleteAction + '" style="float: right; margin: 4px 4px 3px 0px !important;';
+	inner += ' width: 19px !important; height: 20px !important;">';
+	inner += '<span>x</span></div>';
+	//
+	if(!(this.hideInputField)){
+		var showInfoAction = 'singletonRockerStorage.showUploadedFilePath(\'' + this.id + '\');';
+		inner += '<div class="rockerTableButton ui-widget-content ui-corner-all ui-icon ui-icon-info" ';
+		inner += ' onclick="' + showInfoAction + '" style="float: right;margin: 4px 4px 2px 0px !important;';
+		inner += ' width: 19px !important; height: 20px !important;">';
+		inner += '<span>x</span></div>';
+	}
+	//
 	inner += '<div style="clear: both;"></div>';
 	inner += '</div>';
 	inner += '<div style="clear: both;"></div>';
 	inner += '</div>';
+	
 	inner += this.getCloseBootstrapCol();
 	return inner;
 };
@@ -973,25 +989,54 @@ UpperFile.prototype.adjustUrl = function(value){
 	value = prefix + value;
 	return value;
 };
+UpperFile.prototype.showUploadedFilePath = function(){
+	if(null!=this.filePath){
+		var fileName = this.filePath.substring(this.filePath.lastIndexOf('/') + 1);
+		alert(fileName);
+	}
+};
+UpperFile.prototype.deleteFile = function(){
+	if(null!=this.filePath){
+		var fileName = this.filePath.substring(this.filePath.lastIndexOf('/') + 1);
+		var msg = singletonRockerI18n.getMessage('UpperFile.confirmDeleteUploadedFileMsg',[fileName]);
+		if(!(confirm(msg))){
+			return;
+		}
+		var url = this.actionUploadResult + '?operation=removeUploadedFile&filePath=' + this.filePath;
+		var rockerAjaxHandler = new RockerAjaxHandler(url,'true');//expectedResult
+		var thisThis = this;
+		rockerAjaxHandler.handleSuceed = function(result){
+			thisThis.update('');
+			var msg = singletonRockerI18n.getMessage('UpperFile.fileDeleted',[fileName]);
+			singletonRockerAjax.innerDrawAlert(msg,2000,null);
+		};
+		rockerAjaxHandler.handleUnsuceed = function(result){
+			var msg = singletonRockerI18n.getMessage('UpperFile.fileNoDeleted',[fileName]);
+			singletonRockerAjax.innerDrawAlert(msg,2000,null);
+		};
+		rockerAjaxHandler.send();
+	}
+};
 UpperFile.prototype.update = function(value){
+	this.filePath = (null!=value && singletonRockerCommons.trim(value).length > 0) ? value : null;
 	var inner = '';
 	if(value != ''){
 		value = this.adjustUrl(value);
 		var idx = value.lastIndexOf('.');
 		var ext = value.substring(idx + 1);
 		if(ext == 'png' || ext == 'bmp'  || ext == 'jpeg'  || ext == 'jpg'  || ext == 'gif'){
-			inner += '<div style="width: 100%; height: 100%; background: url(\'';
+			inner += '<div style="width: 100%; height: ' + (this.height - 29) + 'px; background: url(\'';
 			inner += value;
 			inner += '\'); background-size: cover;">';
 			inner += '</div>';
 		}else{
-			inner += '<embed style="width: 100%; height: 100%;" src="';
+			inner += '<embed style="width: 100%; height: ' + (this.height - 56) + 'px;" src="';
 			inner += value;
 			inner += '">';
 			inner += '</embed>';
 		}
-		singletonRockerCommons.getElement(this.id).value = value;
 	}
+	singletonRockerCommons.getElement(this.id).value = value;
 	singletonRockerCommons.innerHtml('imagePanel_'+ this.id, inner);
 };
 UpperFile.prototype.hideUploaderForm = function(){
@@ -1007,8 +1052,12 @@ UpperFile.prototype.uploadComplete = function(){
 		if(null!=result && result != '' && result != 'error'){
 			thisThis.update(result);
 			thisThis.hideUploaderForm();
+			var msg = singletonRockerI18n.getMessage('UpperFile.fileUploadSucess',null);
+			singletonRockerAjax.innerDrawAlert(msg,2000,null);
 		}else{
 			thisThis.hideUploaderForm();
+			var msg = singletonRockerI18n.getMessage('UpperFile.fileUploadError',null);
+			singletonRockerAjax.innerDrawAlert(msg,2000,null);
 		}
 	};
 	rockerAjaxHandler.handleUnsuceed = function(result){
@@ -1051,7 +1100,8 @@ UpperFile.prototype.generateInnerFormUpLoad = function(){
 		var uploadOKForm = singletonRockerI18n.getMessage('UpperFile.uploadOKForm',null);
 		var uploadCancelForm = singletonRockerI18n.getMessage('UpperFile.uploadCancelForm',null);
 		inner += '<input id="btSubmitUp_'+ id +'" value="'+ uploadOKForm + '" type="submit" class="ui-button ui-corner-all" onclick="';
-		inner += 'if(!singletonRockerStorage.validateExtensionUpload(\'' + this.id + '\',singletonRockerCommons.getElement(\'btFileUp_'+ id +'\').value,\'divMsgs_' + id + '\')){return false;}';
+		inner += 'if(!singletonRockerStorage.validateExtensionUpload(\'' + this.id + '\',singletonRockerCommons.getElement(\'btFileUp_';
+		inner += id +'\').value,\'divMsgs_' + id + '\')){return false;}';
 		inner += 'var splash = new RockerSplashMask(\'container_';
 		inner += id +'\', 500); splash.makeSplash(); singletonRockerStorage.uploadSended(\'' + this.id + '\');"/>';
 		inner += '<input id="btResetUp_'+ id +'" value="' + uploadCancelForm + '" type="reset" class="ui-button ui-corner-all" style="margin-left: 5px;"';
@@ -1084,6 +1134,7 @@ var UpperFileS3 = function (id,label,value,width,height,appenderId,titleUploader
 								bootstrapClass,bootstrapNewLine) {
 	this.id = id;
 	this.shadowId = 'shadowMask_upperS3_' + this.id;
+	this.filePath = null;
 	this.name = id;
 	this.label = label;
 	this.value = value;
@@ -1119,53 +1170,86 @@ UpperFileS3.prototype.constructor = UpperFileS3;
 UpperFileS3.prototype.generateDrawContent = function(){
 	var inner = '';
 	inner += this.getOpenBootstrapCol();
-	inner += '<span class="rockerContainer ui-widget-content ui-corner-all" style="width: '+ (this.width) +'px; height: ' + (this.height) + 'px; float: left;">';
+	inner += '<div class="rockerContainer ui-widget-content ui-corner-all" style="width: '+ (this.width) +'px; height: ' + (this.height) + 'px; float: left;">';
 	inner += '<div style="clear: both;"></div>';
 	inner += '<div class="rockerLabel ui-widget-header ui-corner-top" style="padding: 3px; width: 100%; margin-top: -1px;">&nbsp;' + this.label + '</div>';
 	inner += '';
-	inner += '<div id="imagePanel_'+ this.id +'" style="width: 100%; height: ' + (this.height - 37);
+	inner += '<div id="imagePanel_'+ this.id +'" style="width: 100%; height: ' + (this.height - 29);
 	inner += 'px; margin: 0px;" class="rockerInputDisable" >';
 	inner += '';
 	inner += '</div>';
 	inner += '<div  class="ui-widget ui-widget-header ui-corner-bottom" >';
 	inner += '<input type="hidden" id="checker_'+ this.id +'" name="checker_'+ this.id +'" value="" />';
 	inner += '<input id="'+ this.id + '" name="'+ this.id + '" ';
-	inner += ' type="text" style="width: '+ (((this.width/3) - 10) * 2) +'px; margin:  4px  4px  6px  4px;" ';
-	if(this.hideInputField){
-		inner += ' class="rockerInput ui-corner-all" ';
-	}else{
-		inner += ' class="rockerInputDisabled ui-corner-all" onkeydown="return false;" ';
-	}
+	inner += ' type="text" style="display: none;" ';
+	inner += ' class="rockerInput ui-corner-all" ';
 	inner += ' value="' + this.value +'" />';
 	//
 	var uploadUploadForm = singletonRockerI18n.getMessage('UpperFile.uploadUploadForm',null);
-	inner += '<input style="font-size: 11px; font-family: verdana; margin-top: -4px;" ';
+	inner += '<input style="font-size: 10px; font-family: verdana; margin: 3px 4px 3px 0px; float: right;" ';
 	inner += ' class="ui-button ui-corner-all" type="button" value="' + uploadUploadForm + '" onclick="'+ this.onclick +'" />';
+	//
+	var deleteAction = 'singletonRockerStorage.removeUploadedFile(\'' + this.id + '\');';
+	inner += '<div class="rockerTableButton ui-widget-content ui-corner-all ui-icon ui-icon-trash" ';
+	inner += ' onclick="' + deleteAction + '" style="float: right; margin: 4px 4px 3px 0px !important;';
+	inner += ' width: 19px !important; height: 20px !important;">';
+	inner += '<span>x</span></div>';
+	//
+	if(!(this.hideInputField)){
+		var showInfoAction = 'singletonRockerStorage.showUploadedFilePath(\'' + this.id + '\');';
+		inner += '<div class="rockerTableButton ui-widget-content ui-corner-all ui-icon ui-icon-info" ';
+		inner += ' onclick="' + showInfoAction + '" style="float: right;margin: 4px 4px 2px 0px !important;';
+		inner += ' width: 19px !important; height: 20px !important;">';
+		inner += '<span>x</span></div>';
+	}
+	//
 	inner += '<div style="clear: both;"></div>';
 	inner += '</div>';
 	inner += '<div style="clear: both;"></div>';
-	inner += '</span>';
+	inner += '</div>';
+	//
 	inner += this.getCloseBootstrapCol();
 	return inner;
 };
+UpperFileS3.prototype.showUploadedFilePath = function(){
+	if(null!=this.filePath){
+		var fileName = this.filePath.substring(this.filePath.lastIndexOf('/') + 1);
+		alert(fileName);
+	}
+};
+UpperFileS3.prototype.deleteFile = function(){
+	if(null!=this.filePath){
+		var fileName = this.filePath.substring(this.filePath.lastIndexOf('/') + 1);
+		var msg = singletonRockerI18n.getMessage('UpperFile.confirmDeleteUploadedFileMsg',[fileName]);
+		if(!(confirm(msg))){
+			return;
+		}
+		var deleteS3 = '';
+		deleteS3 += 'new RockerAmazonS3Deleter(\'' + this.s3user + '\',\'';
+		deleteS3 += this.s3password + '\',\'' + this.s3region + '\',\'' + this.s3bucket + '\',\'';
+		deleteS3 += this.id + '\',\'' + fileName + '\',' + this.delayTimeMsgs + ');';
+		eval(deleteS3);
+	}
+};
 UpperFileS3.prototype.update = function(value){
+	this.filePath = (null!=value && singletonRockerCommons.trim(value).length > 0) ? value : null;
 	var inner = '';
 	if(value != ''){
 		var idx = value.lastIndexOf('.');
 		var ext = value.substring(idx + 1);
 		if(ext == 'png' || ext == 'bmp'  || ext == 'jpeg'  || ext == 'jpg'  || ext == 'gif'){
-			inner += '<div style="width: 100%; height: 100%; background: url(\'';
+			inner += '<div style="width: 100%; height:  ' + (this.height - 29) + 'px; background: url(\'';
 			inner += value;
 			inner += '\'); background-size: cover;">';
 			inner += '</div>';
 		}else{
-			inner += '<embed style="width: 100%; height: 100%;" src="';
+			inner += '<embed style="width: 100%; height: ' + (this.height - 56) + 'px;" src="';
 			inner += value;
 			inner += '">';
 			inner += '</embed>';
 		}
-		singletonRockerCommons.getElement(this.id).value = value;
 	}
+	singletonRockerCommons.getElement(this.id).value = value;
 	singletonRockerCommons.innerHtml('imagePanel_'+ this.id, inner);
 };
 UpperFileS3.prototype.removeShadow = function(){
@@ -1208,7 +1292,8 @@ UpperFileS3.prototype.generateInnerFormUpLoad = function(){
 		var uploadOKForm = singletonRockerI18n.getMessage('UpperFile.uploadOKForm',null);
 		var uploadCancelForm = singletonRockerI18n.getMessage('UpperFile.uploadCancelForm',null);
 		inner += '<input id="btSubmitUp_'+ id +'" value="'+ uploadOKForm + '" type="button" class="ui-button ui-corner-all" onclick="';
-		inner += 'if(!singletonRockerStorage.validateExtensionUpload(\'' + this.id + '\',singletonRockerCommons.getElement(\'btFileUp_'+ id +'\').value,\'divMsgs_' + id + '\')){return false;}';
+		inner += 'if(!singletonRockerStorage.validateExtensionUpload(\'' + this.id + '\',singletonRockerCommons.getElement(\'btFileUp_';
+		inner += id +'\').value,\'divMsgs_' + id + '\')){return false;}';
 		inner += onclickS3 + '"/>';
 		inner += '<input id="btResetUp_'+ id +'" value="'+ uploadCancelForm +'" type="reset" class="ui-button ui-corner-all" style="margin-left: 5px;"';
 		inner += ' onclick="singletonRockerCommons.hide(\'container_' + id +'\');';

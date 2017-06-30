@@ -64,12 +64,19 @@ var RockerI18n = function(){
 		var uploadOKForm = 'OK';
 		var uploadCancelForm = 'Cancel';
 		var confirmVisualCodeStorageClearMsg = 'You wish clear the Rocker Elements collection?';
+		var confirmDeleteUploadedFileUpperFileMsg = 'Delete file "{0}"? You are sure?';
+		var fileNoDeleted = 'File "{0}" was not deleted. Error: {1}';
+		var fileDeleted = 'File "{0}" was sucessulfully deleted.';
+		var fileNoDeletedUpperFile = 'File "{0}" was not deleted.';
 		this.messages = [
 		                 ['RockerAmazonS3Handler.fileSizeOverflow',fileSizeOverflow],
 		                 ['RockerAmazonS3Handler.fileUploadError',fileUploadError],
 		                 ['RockerAmazonS3Handler.fileUploadSucess',fileUploadSucess],
 		                 ['RockerAmazonS3Handler.noFileToUpload',noFileToUpload],
+						 ['RockerAmazonS3Handler.fileNoDeleted',fileNoDeleted],
+						 ['RockerAmazonS3Handler.fileDeleted',fileDeleted],
 		                 ['RockerStorage.invalidExtension',invalidExtension],
+						 ['RockerStorage.confirmVisualCodeStorageClearMsg',confirmVisualCodeStorageClearMsg],
 		                 ['RockerValidatorData.invalidDay',invalidDay],
 		                 ['RockerValidatorData.invalidMonth',invalidMonth],
 		                 ['RockerTable.confirmExclusionLabel',confirmExclusionLabel],
@@ -87,10 +94,14 @@ var RockerI18n = function(){
 		                 ['UpperFile.uploadUploadForm',uploadUploadForm],
 		                 ['UpperFile.uploadCancelForm',uploadCancelForm],
 		                 ['UpperFile.uploadOKForm',uploadOKForm],
-		                 ['RockerStorage.confirmVisualCodeStorageClearMsg',confirmVisualCodeStorageClearMsg]
+						 ['UpperFile.confirmDeleteUploadedFileMsg',confirmDeleteUploadedFileUpperFileMsg],
+						 ['UpperFile.fileUploadError',fileUploadError],
+		                 ['UpperFile.fileUploadSucess',fileUploadSucess],
+						 ['UpperFile.fileNoDeleted',fileNoDeletedUpperFile],
+						 ['UpperFile.fileDeleted',fileDeleted],
 		                 ];
 	};
 };
-// var msg = singletonRockerI18n.getMessage('RockerStorage.confirmVisualCodeStorageClearMsg',null);
+// var msg = singletonRockerI18n.getMessage('UpperFile.confirmDeleteUploadedFileMsg',fileName);
 var singletonRockerI18n = new RockerI18n();
 singletonRockerI18n.initialize();

@@ -100,3 +100,42 @@ var RockerAmazonS3Handler = function(userId,userKey,region,bucketName,targetInpu
 		console.log('Error on handleUpload: ' + error);
 	}
 };
+
+var RockerAmazonS3Deleter = function(userId,userKey,region,bucketName,upperFileId,fileName,delayTimeMsgs){
+	this.userId = userId;
+	this.userKey = userKey;
+	this.region = region;
+	this.bucketName = bucketName;
+	this.upperFileId = upperFileId;
+	this.fileName =  fileName.replace(/ /gi,'');
+	this.delayTimeMsgs = delayTimeMsgs;
+	this.handleDeletion = function(){
+		try {
+			AWS.config.update({accessKeyId: this.userId, secretAccessKey: this.userKey});
+			AWS.config.region = this.region;
+			var bucket = new AWS.S3({params: {Bucket: this.bucketName}});
+			var parameters = {Key: this.fileName};
+			var thisThis = this;
+			bucket.deleteObject(parameters, function (err, data) {
+		        if(err){
+					var msg = singletonRockerI18n.getMessage('RockerAmazonS3Handler.fileNoDeleted',[thisThis.fileName,err]);
+					singletonRockerAjax.innerDrawAlert(msg,thisThis.delayTimeMsgs,null);
+					console.log(msg + ' : ' + err);
+		        }else{
+					var msg = singletonRockerI18n.getMessage('RockerAmazonS3Handler.fileDeleted',[thisThis.fileName]);
+					singletonRockerAjax.innerDrawAlert(msg,thisThis.delayTimeMsgs,null);
+					singletonRockerStorage.updateAfterS3UploadComplete(thisThis.upperFileId,'');
+				}
+		    });
+		} catch (error) {
+			console.log('Error on handleDeletion: ' + error);
+		}
+	};
+	try {
+		this.handleDeletion();
+	} catch (error) {
+		this.finalize();
+		console.log('Error on handleDeletion: ' + error);
+	}
+};
+

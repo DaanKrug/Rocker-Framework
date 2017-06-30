@@ -295,6 +295,20 @@ var RockerStorage = function(){
 			jsInputText.update(value);
 		}
 	};
+	this.removeUploadedFile = function(id){
+		if(!this.validate()){return false;}
+		var jsInputText = this.getJsInputText(id);
+		if(null!=jsInputText){
+			jsInputText.deleteFile();
+		}
+	};
+	this.showUploadedFilePath = function(id){
+		if(!this.validate()){return false;}
+		var jsInputText = this.getJsInputText(id);
+		if(null!=jsInputText){
+			jsInputText.showUploadedFilePath();
+		}
+	};
 	this.removeShadowMaskFromS3Upper = function(id){
 		if(!this.validate()){return false;}
 		var jsInputText = this.getJsInputText(id);
