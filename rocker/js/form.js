@@ -230,6 +230,15 @@ var RockerForm = function(title,idAppenderForm,horizontalAlignFields,width,closa
 						value = json[nameC];
 						if(typeC == "textarea" && this.cipherData && (value.indexOf(singletonRockerCripter.sinalizer) != -1)){
 							value = singletonRockerCripter.decriptTrunk(value);
+							value = singletonRockerCommons.replaceAll(value,'&ccedil;','ç');
+							value = singletonRockerCommons.replaceAll(value,'ccedil;','ç');
+							value = singletonRockerCommons.replaceAll(value,'&Ccedil;','Ç');
+							value = singletonRockerCommons.replaceAll(value,'Ccedil;','Ç');
+							/*
+							value = singletonRockerCommons.replaceAll(value,'','');
+							value = singletonRockerCommons.replaceAll(value,'','');
+							value = singletonRockerCommons.replaceAll(value,'','');
+							*/
 						}else{
 							value = singletonRockerConverterChars.convertToFromDatabase(value,false,false,false,0);
 						}
@@ -287,21 +296,19 @@ var RockerForm = function(title,idAppenderForm,horizontalAlignFields,width,closa
 				var valueC = this.arrayFieldsRollback[i][2];
 				if(typeC == 'checkbox' || typeC == 'radio'){
 					form.elements[nameC].checked = (rollback ? valueC : false);
-				}else{
-					form.elements[nameC].value = ((rollback || (typeC == 'hidden' && nameC != 'id') ) ? valueC : '');
 				}
-				try {
-					if(null!=this.arrayFields[i].typeAux && 
-										(this.arrayFields[i].typeAux == "image" || this.arrayFields[i].typeAux == "imageS3")){
-						if(null==value){
-							value = '';
-						}
-						value = singletonRockerCommons.trim(value);
-						value = singletonRockerCommons.replaceAll(value,' ','');
-						this.arrayFields[i].update(value);
+				else if(typeC == 'text' && null!=this.arrayFieldsRollback[i][3]){
+					if(null==valueC || !rollback){
+						valueC = '';
+					}else{
+						valueC = singletonRockerCommons.trim(valueC);
+						valueC = singletonRockerCommons.replaceAll(valueC,' ','');
 					}
-				} catch (error) {
-					console.log(error);
+					this.arrayFieldsRollback[i][3].update(valueC);
+					form.elements[nameC].value = valueC;
+				}
+				else{
+					form.elements[nameC].value = ((rollback || (typeC == 'hidden' && nameC != 'id') ) ? valueC : '');
 				}
 			}
 		}
@@ -335,22 +342,26 @@ var RockerForm = function(title,idAppenderForm,horizontalAlignFields,width,closa
 						continue;
 					}
 					nameC = this.arrayFields[i].name;
-					arrayFieldsRollback[arrayFieldsRollback.length] = [typeC,nameC,form.elements[nameC].value];
+					arrayFieldsRollback[arrayFieldsRollback.length] = [typeC,nameC,form.elements[nameC].value,null];
 				} else if(typeC == "text" || typeC == "textarea" || typeC == "select"){
 					nameC = this.arrayFields[i].name;
-					arrayFieldsRollback[arrayFieldsRollback.length] = [typeC,nameC,form.elements[nameC].value];
+					if(this.arrayFields[i].typeAux == 'image' || this.arrayFields[i].typeAux == 'imageS3'){
+						arrayFieldsRollback[arrayFieldsRollback.length] = [typeC,nameC,form.elements[nameC].value,this.arrayFields[i]];
+					}else{
+						arrayFieldsRollback[arrayFieldsRollback.length] = [typeC,nameC,form.elements[nameC].value,null];
+					}
 				} else if(typeC == "radio"){
 					nameC = this.arrayFields[i].name;
 					var size2 = this.arrayFields[i].arrayValues.length;
 					for(var j = 0; j < size2; j++){
 						var idC = nameC + '_' + j;
-						arrayFieldsRollback[arrayFieldsRollback.length] = [typeC,idC,singletonRockerCommons.checked(idC)];
+						arrayFieldsRollback[arrayFieldsRollback.length] = [typeC,idC,singletonRockerCommons.checked(idC),null];
 					}
 				} else if(typeC == "checkbox"){
 					var size2 = this.arrayFields[i].arrayCheckNames.length;
 					for(var j = 0; j < size2; j++){
 						nameC = this.arrayFields[i].arrayCheckNames[j];
-						arrayFieldsRollback[arrayFieldsRollback.length] = [typeC,nameC,form.elements[nameC].checked];
+						arrayFieldsRollback[arrayFieldsRollback.length] = [typeC,nameC,form.elements[nameC].checked,null];
 					}
 				}
 			}
